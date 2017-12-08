@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: UCPT Strategy Card
-Plugin URI: http://code.mygarrettcounty.com
+Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
 Version: 0.9.1
 Requires at least: 3.3
 Tested up to: 4.8.1
 License: GPL v3
 Author: UCPT
-Author URI: http://code.mygarrettcounty.com
+Author URI: https://equityengage.com
 */
 //////////////////// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
 function bp_group_meta_init() {
