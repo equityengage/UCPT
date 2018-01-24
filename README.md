@@ -13,7 +13,7 @@ This project is coordinated by the Garrett County Health Department, and is supp
 The release currently contained within the Core-Modules folder is a preview release for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # Release Schedule
-The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, use in multi-networks, and several other enhancements.
+The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
 1/31/2018 - Initial Release Candidate 1.0
 
@@ -22,4 +22,4 @@ The anticipated release schedule will run from January 31, 2018 - July 1, 2018 w
 # CHANGELOG
 
 # Participation & Support
-This project is currently maintained by the Garrett County Health Department, and was supported for public, open source release by PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation. 
+This project is currently maintained by the <a href="https://garretthealth.org/">Garrett County Health Department</a>, and was supported for public, open source release by <a href="https://phnci.org/">PHNCI</a>, a division of <a href="http://www.phaboard.org/">PHAB</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation</a>. 
