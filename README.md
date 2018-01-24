@@ -20,3 +20,6 @@ The anticipated release schedule will run from January 31, 2018 - July 1, 2018 w
 2/14/2018 - Release 1._
 
 # CHANGELOG
+
+# Participation & Support
+This project is currently maintained by the Garrett County Health Department, and was supported for public, open source release by PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation. 
