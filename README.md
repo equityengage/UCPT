@@ -8,3 +8,12 @@ The WordPress plug-ins contained within this repository are working, deployable 
 The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-by-step implementation instructions can be found on EquityEngage.com.
 
 This project is coordinated by the Garrett County Health Department, and is supported by PHNCI, a division of PHAB, with support from the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
+
+# Preview Release
+The release currently contained within the Core-Modules folder is a preview release for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
+
+# Release Schedule
+The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, use in multi-networks, and several other enhancements.
+
+# CHANGELOG
+1/31/2018 - Initial Release Candidate
