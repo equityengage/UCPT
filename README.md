@@ -15,5 +15,8 @@ The release currently contained within the Core-Modules folder is a preview rele
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, use in multi-networks, and several other enhancements.
 
+1/31/2018 - Initial Release Candidate 1.0
+
+2/14/2018 - Release 1._
+
 # CHANGELOG
-1/31/2018 - Initial Release Candidate
