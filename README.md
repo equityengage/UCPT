@@ -19,6 +19,11 @@ The anticipated release schedule will run from January 31, 2018 - July 1, 2018 w
 
 2/14/2018 - Release 1._
 
+# Projects
+<ul>
+<li><a href="https://mygarrettcounty.com">MyGarrettCounty.com</a> - The Garrett County, Maryland pilot of the UCPT framework and plug-ins</li>
+</ul>
+
 # CHANGELOG
 
 # Participation & Support
