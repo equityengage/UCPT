@@ -174,41 +174,17 @@ function add_page_to_group() {
 				}
 				if (custom_field('ucpt_goal') != "") {
 					echo "<p><b>Goal: " . custom_field('ucpt_goal') . "</b></p>";
-				}
-				if (custom_field('ucpt_desc') != "") {
 					echo "<p>Strategy Description: " . custom_field('ucpt_desc') . "</p>";
-				}
-				if (custom_field('ucpt_level') != "") {
 					echo "<p>Level of Change: " . custom_field('ucpt_level') . "</p>";
-				}
-				if (custom_field('ucpt_focus') != "") {
 					echo "<p>Primary Focus Area: " . custom_field('ucpt_focus') . "</p>";
-				}
-				if (custom_field('ucpt_date_start') != "") {
 					echo "<p>Estimated Implementation Date: " . custom_field('ucpt_date_start') . "</p>";
-				}
-				if (custom_field('ucpt_date_end') != "") {
 					echo "<p>Estimated Completion Date: " . custom_field('ucpt_date_end') . "</p>";
-				}
-				if (custom_field('ucpt_cis_ease') != "") {
 					echo "<p>Estimated Ease of Implementation: " . custom_field('ucpt_cis_ease') . "</p>";
-				}
-				if (custom_field('ucpt_cis_cost') != "") {
 					echo "<p>Estimated Cost of Implementation: " . custom_field('ucpt_cis_cost') . "</p>";
-				}
-				if (custom_field('ucpt_cis_benefit') != "") {
 					echo "<p>Potential Community Benefit: " . custom_field('ucpt_cis_benefit') . "</p>";
-				}	
-				if (custom_field('ucpt_measure_1') != "") {
 					echo "<p>Primary Measure: " . custom_field('ucpt_measure_1') . "</p>";
-				}
-				if (custom_field('ucpt_measure_2') != "") {
 					echo "<p>Secondary Measure: " . custom_field('ucpt_measure_2') . "</p>";
-				}
-				if (custom_field('ucpt_measure_3') != "") {
 					echo "<p>Tertiary Measure: " . custom_field('ucpt_measure_3') . "</p>";
-				}	
-				if (custom_field('ucpt_research') != "") {
 					echo "<p>Research: " . custom_field('ucpt_research') . "</p>";
 				}
 			}
