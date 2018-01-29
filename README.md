@@ -11,15 +11,15 @@ This project is coordinated by the Garrett County Health Department, and is supp
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=release-candidate-1.0) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/release-candidate-1.0)
 
-# Preview Release
-The release currently contained within the Core-Modules folder is a preview release for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
+# v1.0 - UCPT Release Candidate 1.0
+The release currently contained within the Core-Modules folder is an initial release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
-1/31/2018 - Initial Release Candidate 1.0
+1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 
-2/14/2018 - Release 1._
+2/14/2018 - v1.1 - UCPT 1.1
 
 # Projects
 <ul>
