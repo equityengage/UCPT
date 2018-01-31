@@ -3,7 +3,7 @@
 Plugin Name: UCPT Raw Data Module for 2020 Goals
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of raw data reporting to BuddyPress groups.
-Version: 0.9.1
+Version: 1.0
 Requires at least: 3.3
 Tested up to: 4.8.1
 License: GPL v3
