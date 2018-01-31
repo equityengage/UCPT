@@ -21,19 +21,20 @@ function group_header_fields_markup() {
 global $bp, $wpdb;
 //////////////////// End BuddyPress Group Meta Management
 //////////////////// Front-End Output
-?>
+
 //////////////////// Note: TinyMCE Cloud is Recommended for Rich Text Editing: https://go.tinymce.com/cloud/
+?>
 <div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 	<b style="font-size: 150%;">Strategy Planning Worksheet</b>
 	<p>An innovative feature, unique to GarrettPlan.org, is the ability to dynamically track strategy progress over time. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
 
-		<label for="ucpt_goal">Goal</label>
+		<label style="color: #fff;" for="ucpt_goal">Goal</label>
 			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field('ucpt_goal'); ?>" />
 
-		<label for="ucpt_desc">Strategy Description</label>
+		<label style="color: #fff;" for="ucpt_desc">Strategy Description</label>
 			<textarea id="ucpt_desc" name="ucpt_desc"><?php echo custom_field('ucpt_desc'); ?></textarea>
 
-		<label for="ucpt_level">Level of Change</label>
+		<label style="color: #fff;" for="ucpt_level">Level of Change</label>
 			<select name="ucpt_level">
 				<option value="<?php echo custom_field('ucpt_level'); ?>"><?php echo custom_field('ucpt_level'); ?></option>
 				<option value="Policy">Policy</option>
@@ -41,7 +42,7 @@ global $bp, $wpdb;
 				<option value="Programs">Program</option>
 			</select>
 
-		<label for="ucpt_focus">Primary Focus Area</label>
+		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
@@ -50,13 +51,13 @@ global $bp, $wpdb;
 				<option value="Access to Care and Linkages to Community Resources">Access to Care and Linkages to Community Resources</option>
 			</select>
 
-		<label for="ucpt_date_start">Estimated Implementation Date</label>
+		<label style="color: #fff;" for="ucpt_date_start">Estimated Implementation Date</label>
 			<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field('ucpt_date_start'); ?>" />
 
-		<label for="ucpt_date_end">Estimated Completion Date</label>
+		<label style="color: #fff;" for="ucpt_date_end">Estimated Completion Date</label>
 			<input id="ucpt_date_end" type="date" name="ucpt_date_end" value="<?php echo custom_field('ucpt_date_end'); ?>" />
 
-		<label for="ucpt_cis_ease">Estimated Ease of Implementation</label>
+		<label style="color: #fff;" for="ucpt_cis_ease">Estimated Ease of Implementation</label>
 			<select name="ucpt_cis_ease">
 				<option value="<?php echo custom_field(ucpt_cis_ease); ?>"><?php echo custom_field(ucpt_cis_ease); ?></option>
 				<option value="Very Easy">Very Easy</option>
@@ -66,7 +67,7 @@ global $bp, $wpdb;
 				<option value="Very Hard">Very Hard</option>
 			</select>
 
-		<label for="ucpt_cis_cost">Estimated Cost of Implementation</label>
+		<label style="color: #fff;" for="ucpt_cis_cost">Estimated Cost of Implementation</label>
 			<select name="ucpt_cis_cost">
 				<option value="<?php echo custom_field(ucpt_cis_cost); ?>"><?php echo custom_field(ucpt_cis_cost); ?></option>
 				<option value="Very Low">Very Low</option>
@@ -76,7 +77,7 @@ global $bp, $wpdb;
 				<option value="Very High">Very High</option>
 			</select>
 
-		<label for="ucpt_cis_benefit">Estimated Potential Community Benefit</label>
+		<label style="color: #fff;" for="ucpt_cis_benefit">Estimated Potential Community Benefit</label>
 			<select name="ucpt_cis_benefit">
 				<option value="<?php echo custom_field(ucpt_cis_benefit); ?>"><?php echo custom_field(ucpt_cis_benefit); ?></option>
 				<option value="Very High">Very High</option>
@@ -86,7 +87,7 @@ global $bp, $wpdb;
 				<option value="Very Low">Very Low</option>
 			</select>
 
-		<label for="ucpt_research">Research</label>
+		<label style="color: #fff;" for="ucpt_research">Research</label>
 			<textarea id="ucpt_research" name="ucpt_research"><?php echo custom_field('ucpt_research'); ?></textarea>
 	<br />
 </div>
@@ -162,11 +163,11 @@ function add_page_to_group() {
 				);
 				parent::init( $args );
 			}
-			function settings_screen( $group_id ) {
+			function settings_screen( $group_id = null ) {
 				// don't remove this function
 				echo "Additional settings are planned for the future. Stay tuned!";
 			}    
-			function display() {
+			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				if (custom_field('ucpt_goal') == "") {
@@ -174,41 +175,17 @@ function add_page_to_group() {
 				}
 				if (custom_field('ucpt_goal') != "") {
 					echo "<p><b>Goal: " . custom_field('ucpt_goal') . "</b></p>";
-				}
-				if (custom_field('ucpt_desc') != "") {
 					echo "<p>Strategy Description: " . custom_field('ucpt_desc') . "</p>";
-				}
-				if (custom_field('ucpt_level') != "") {
 					echo "<p>Level of Change: " . custom_field('ucpt_level') . "</p>";
-				}
-				if (custom_field('ucpt_focus') != "") {
 					echo "<p>Primary Focus Area: " . custom_field('ucpt_focus') . "</p>";
-				}
-				if (custom_field('ucpt_date_start') != "") {
 					echo "<p>Estimated Implementation Date: " . custom_field('ucpt_date_start') . "</p>";
-				}
-				if (custom_field('ucpt_date_end') != "") {
 					echo "<p>Estimated Completion Date: " . custom_field('ucpt_date_end') . "</p>";
-				}
-				if (custom_field('ucpt_cis_ease') != "") {
 					echo "<p>Estimated Ease of Implementation: " . custom_field('ucpt_cis_ease') . "</p>";
-				}
-				if (custom_field('ucpt_cis_cost') != "") {
 					echo "<p>Estimated Cost of Implementation: " . custom_field('ucpt_cis_cost') . "</p>";
-				}
-				if (custom_field('ucpt_cis_benefit') != "") {
 					echo "<p>Potential Community Benefit: " . custom_field('ucpt_cis_benefit') . "</p>";
-				}	
-				if (custom_field('ucpt_measure_1') != "") {
 					echo "<p>Primary Measure: " . custom_field('ucpt_measure_1') . "</p>";
-				}
-				if (custom_field('ucpt_measure_2') != "") {
 					echo "<p>Secondary Measure: " . custom_field('ucpt_measure_2') . "</p>";
-				}
-				if (custom_field('ucpt_measure_3') != "") {
 					echo "<p>Tertiary Measure: " . custom_field('ucpt_measure_3') . "</p>";
-				}	
-				if (custom_field('ucpt_research') != "") {
 					echo "<p>Research: " . custom_field('ucpt_research') . "</p>";
 				}
 			}

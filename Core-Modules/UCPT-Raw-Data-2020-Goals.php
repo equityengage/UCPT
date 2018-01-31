@@ -1112,11 +1112,11 @@ function add_page_to_group_data() {
 				);
 				parent::init( $args );
 			}
-			function settings_screen( $group_id ) {
+			function settings_screen( $group_id = null ) {
 				// don't remove this function
 				echo "Additional settings are planned for the future. Stay tuned!";
 			}    
-			function display() {
+			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				if (custom_field('ucpt_measure_1') == "") {
