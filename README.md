@@ -9,7 +9,10 @@ The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-
 
 This project is coordinated by the Garrett County Health Department, and is supported by PHNCI, a division of PHAB, with support from the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=release-candidate-1.0) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/release-candidate-1.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
+
+# v1.1 - UCPT Release Candidate 1.1
+The release currently contained within the Core-Modules folder is an improved release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # v1.0 - UCPT Release Candidate 1.0
 The release currently contained within the Core-Modules folder is an initial release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
@@ -17,9 +20,9 @@ The release currently contained within the Core-Modules folder is an initial rel
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with frequent updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
-1/31/2018 - v1.0 - UCPT Release Candidate 1.0
-
 3/22/2018 - v1.1 - UCPT Release Candidate 1.1
+
+1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 
 # Projects
 <ul>
