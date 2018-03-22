@@ -3,7 +3,7 @@
 Plugin Name: UCPT Strategy Card
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
-Version: 1.0
+Version: 1.1
 Requires at least: 3.3
 Tested up to: 4.8.1
 License: GPL v3
@@ -41,14 +41,47 @@ global $bp, $wpdb;
 				<option value="Systems">Systems</option>
 				<option value="Programs">Program</option>
 			</select>
-
+		<?php
+		$options = get_option( 'ucpt_manage_settings' );
+		?>
 		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
+				<?php
+				if ($options['ucpt_manage_priority_1'] != "") {
+				?>
+				<option value="<?php echo $options['ucpt_manage_priority_1']; ?>"><?php echo $options['ucpt_manage_priority_1']; ?></option>
+				<?php
+				}
+				if ($options['ucpt_manage_priority_2'] != "") {
+				?>
+				<option value="<?php echo $options['ucpt_manage_priority_2']; ?>"><?php echo $options['ucpt_manage_priority_2']; ?></option>
+				<?php
+				}
+				if ($options['ucpt_manage_priority_3'] != "") {
+				?>
+				<option value="<?php echo $options['ucpt_manage_priority_3']; ?>"><?php echo $options['ucpt_manage_priority_3']; ?></option>
+				<?php
+				}
+				if ($options['ucpt_manage_priority_4'] != "") {
+				?>
+				<option value="<?php echo $options['ucpt_manage_priority_4']; ?>"><?php echo $options['ucpt_manage_priority_4']; ?></option>
+				<?php
+				}
+				if ($options['ucpt_manage_priority_5'] != "") {
+				?>
+				<option value="<?php echo $options['ucpt_manage_priority_5']; ?>"><?php echo $options['ucpt_manage_priority_5']; ?></option>
+				<?php
+				}
+				if ($options['ucpt_manage_priority_1'] == "") {
+				?>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
 				<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
 				<option value="Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use">Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use</option>
 				<option value="Access to Care and Linkages to Community Resources">Access to Care and Linkages to Community Resources</option>
+				<?php
+				}
+				?>
 			</select>
 
 		<label style="color: #fff;" for="ucpt_date_start">Estimated Implementation Date</label>
