@@ -20,9 +20,9 @@ The release currently contained within the Core-Modules folder is an initial rel
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with frequent updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
-1/31/2018 - v1.0 - UCPT Release Candidate 1.0
-
 3/22/2018 - v1.1 - UCPT Release Candidate 1.1
+
+1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 
 # Projects
 <ul>
