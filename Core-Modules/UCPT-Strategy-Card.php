@@ -216,9 +216,6 @@ function add_page_to_group() {
 					echo "<p>Estimated Ease of Implementation: " . custom_field('ucpt_cis_ease') . "</p>";
 					echo "<p>Estimated Cost of Implementation: " . custom_field('ucpt_cis_cost') . "</p>";
 					echo "<p>Potential Community Benefit: " . custom_field('ucpt_cis_benefit') . "</p>";
-					echo "<p>Primary Measure: " . custom_field('ucpt_measure_1') . "</p>";
-					echo "<p>Secondary Measure: " . custom_field('ucpt_measure_2') . "</p>";
-					echo "<p>Tertiary Measure: " . custom_field('ucpt_measure_3') . "</p>";
 					echo "<p>Research: " . custom_field('ucpt_research') . "</p>";
 				}
 			}
