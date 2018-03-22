@@ -11,6 +11,9 @@ This project is coordinated by the Garrett County Health Department, and is supp
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=release-candidate-1.0) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=release-candidate-1.0)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/release-candidate-1.0)
 
+# v1.1 - UCPT Release Candidate 1.1
+The release currently contained within the Core-Modules folder is an improved release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
+
 # v1.0 - UCPT Release Candidate 1.0
 The release currently contained within the Core-Modules folder is an initial release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
