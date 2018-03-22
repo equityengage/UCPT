@@ -26,7 +26,7 @@ global $bp, $wpdb;
 ?>
 <div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 	<b style="font-size: 150%;">Strategy Planning Worksheet</b>
-	<p>An innovative feature, unique to GarrettPlan.org, is the ability to dynamically track strategy progress over time. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
+	<p>Dynamically tracking strategy progress over time is essential to evaluating the effectivesness of programs and initiatives. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
 
 		<label style="color: #fff;" for="ucpt_goal">Goal</label>
 			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field('ucpt_goal'); ?>" />
