@@ -9,7 +9,7 @@ The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-
 
 This project is coordinated by the Garrett County Health Department, and is supported by PHNCI, a division of PHAB, with support from the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master)[![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
 
 # v1.1 - UCPT Release Candidate 1.1
 The release currently contained within the Core-Modules folder is an improved release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
