@@ -26,7 +26,7 @@ global $bp, $wpdb;
 ?>
 <div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 	<b style="font-size: 150%;">Strategy Planning Worksheet</b>
-	<p>An innovative feature, unique to GarrettPlan.org, is the ability to dynamically track strategy progress over time. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
+	<p>Dynamically tracking strategy progress over time is essential to evaluating the effectivesness of programs and initiatives. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
 
 		<label style="color: #fff;" for="ucpt_goal">Goal</label>
 			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field('ucpt_goal'); ?>" />
@@ -41,47 +41,14 @@ global $bp, $wpdb;
 				<option value="Systems">Systems</option>
 				<option value="Programs">Program</option>
 			</select>
-		<?php
-		$options = get_option( 'ucpt_manage_settings' );
-		?>
+
 		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
-				<?php
-				if ($options['ucpt_manage_priority_1'] != "") {
-				?>
-				<option value="<?php echo $options['ucpt_manage_priority_1']; ?>"><?php echo $options['ucpt_manage_priority_1']; ?></option>
-				<?php
-				}
-				if ($options['ucpt_manage_priority_2'] != "") {
-				?>
-				<option value="<?php echo $options['ucpt_manage_priority_2']; ?>"><?php echo $options['ucpt_manage_priority_2']; ?></option>
-				<?php
-				}
-				if ($options['ucpt_manage_priority_3'] != "") {
-				?>
-				<option value="<?php echo $options['ucpt_manage_priority_3']; ?>"><?php echo $options['ucpt_manage_priority_3']; ?></option>
-				<?php
-				}
-				if ($options['ucpt_manage_priority_4'] != "") {
-				?>
-				<option value="<?php echo $options['ucpt_manage_priority_4']; ?>"><?php echo $options['ucpt_manage_priority_4']; ?></option>
-				<?php
-				}
-				if ($options['ucpt_manage_priority_5'] != "") {
-				?>
-				<option value="<?php echo $options['ucpt_manage_priority_5']; ?>"><?php echo $options['ucpt_manage_priority_5']; ?></option>
-				<?php
-				}
-				if ($options['ucpt_manage_priority_1'] == "") {
-				?>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
 				<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
 				<option value="Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use">Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use</option>
 				<option value="Access to Care and Linkages to Community Resources">Access to Care and Linkages to Community Resources</option>
-				<?php
-				}
-				?>
 			</select>
 
 		<label style="color: #fff;" for="ucpt_date_start">Estimated Implementation Date</label>
@@ -216,6 +183,9 @@ function add_page_to_group() {
 					echo "<p>Estimated Ease of Implementation: " . custom_field('ucpt_cis_ease') . "</p>";
 					echo "<p>Estimated Cost of Implementation: " . custom_field('ucpt_cis_cost') . "</p>";
 					echo "<p>Potential Community Benefit: " . custom_field('ucpt_cis_benefit') . "</p>";
+					echo "<p>Primary Measure: " . custom_field('ucpt_measure_1') . "</p>";
+					echo "<p>Secondary Measure: " . custom_field('ucpt_measure_2') . "</p>";
+					echo "<p>Tertiary Measure: " . custom_field('ucpt_measure_3') . "</p>";
 					echo "<p>Research: " . custom_field('ucpt_research') . "</p>";
 				}
 			}
