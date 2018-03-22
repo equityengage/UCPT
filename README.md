@@ -15,11 +15,11 @@ This project is coordinated by the Garrett County Health Department, and is supp
 The release currently contained within the Core-Modules folder is an initial release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # Release Schedule
-The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with bi-weekly updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
+The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with frequent updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
 1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 
-2/14/2018 - v1.1 - UCPT 1.1
+3/22/2018 - v1.1 - UCPT Release Candidate 1.1
 
 # Projects
 <ul>
