@@ -396,8 +396,6 @@ function group_header_fields_save_data( $group_id ) {
 			'ucpt_m_' . $measure_count . '_y4_m12'
 		);
 		
-		$m = array_map( 'strip_tags', $m );
-		
 		foreach( $plain_fields as $field ) {
 			$key = $field;
 			if ( isset( $_POST[$key] ) ) {
