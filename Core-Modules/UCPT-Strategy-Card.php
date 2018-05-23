@@ -3,77 +3,82 @@
 Plugin Name: UCPT Strategy Card
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
-Version: 1.1
+Version: 8.01
 Requires at least: 3.3
-Tested up to: 4.8.1
+Tested up to: 4.9.6
 License: GPL v3
 Author: UCPT
 Author URI: https://equityengage.com
 */
+
 //////////////////// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
-function bp_group_meta_init() {
+function bp_group_meta_init_strategy() {
 function custom_field($meta_key='') {
+
 //get current group id and load meta_key value if passed. If not pass it blank
 return groups_get_groupmeta( bp_get_group_id(), $meta_key) ;
 }
+
 // This function is our custom field's form that is called in create a group and when editing group details
-function group_header_fields_markup() {
+function ucpt_strategy_fields_markup() {
 global $bp, $wpdb;
 //////////////////// End BuddyPress Group Meta Management
-//////////////////// Front-End Output
 
-//////////////////// Note: TinyMCE Cloud is Recommended for Rich Text Editing: https://go.tinymce.com/cloud/
+//////////////////// Front-End Output
+$editor_settings = array( 'media_buttons' => false );
 ?>
+
 <div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 	<b style="font-size: 150%;">Strategy Planning Worksheet</b>
-	<p>Dynamically tracking strategy progress over time is essential to evaluating the effectivesness of programs and initiatives. If your workspace is designed to collaborate on a specific strategy, please fill out the following fields with a blue background.  If your group is not collaborating on a specific strategy, leave these fields blank. In order to ensure that strategies can be accurately measured, please only measure one strategy per group.</p>
+	<p>An innovative feature, unique to the planning tool, is the ability to dynamically track strategy progress over time. This workspace is designed for multiple stakeholders to collaborate on one specific strategy.  Please explain the specific strategy you will be measuring in the space below. <b>Expert Tip:</b> If the strategy can not be measured please consider alternative actions that can be assessed.</p>
 
-		<label style="color: #fff;" for="ucpt_goal">Goal</label>
+		<label for="ucpt_goal"><b style="font-size: 110%;">Goal</b></label>
 			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field('ucpt_goal'); ?>" />
 
-		<label style="color: #fff;" for="ucpt_desc">Strategy Description</label>
-			<textarea id="ucpt_desc" name="ucpt_desc"><?php echo custom_field('ucpt_desc'); ?></textarea>
+		<label for="ucpt_desc"><b style="font-size: 110%;">Strategy Description</b></label>
+			<?php wp_editor( custom_field('ucpt_desc'), 'ucpt_desc', $editor_settings ); ?> 
 
-		<label style="color: #fff;" for="ucpt_level">Level of Change</label>
+		<label for="ucpt_level"><b style="font-size: 110%;">Level of Change</b></label>
 			<select name="ucpt_level">
 				<option value="<?php echo custom_field('ucpt_level'); ?>"><?php echo custom_field('ucpt_level'); ?></option>
 				<option value="Policy">Policy</option>
 				<option value="Systems">Systems</option>
 				<option value="Programs">Program</option>
 			</select>
+
 		<?php
-		$options = get_option( 'ucpt_manage_settings' );
+		$ucpt_focus_options = get_option( 'ucpt_manage_settings' );
 		?>
 		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
 				<?php
-				if ($options['ucpt_manage_priority_1'] != "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_1'] != "") {
 				?>
-				<option value="<?php echo $options['ucpt_manage_priority_1']; ?>"><?php echo $options['ucpt_manage_priority_1']; ?></option>
+				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_1']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_1']; ?></option>
 				<?php
 				}
-				if ($options['ucpt_manage_priority_2'] != "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_2'] != "") {
 				?>
-				<option value="<?php echo $options['ucpt_manage_priority_2']; ?>"><?php echo $options['ucpt_manage_priority_2']; ?></option>
+				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_2']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_2']; ?></option>
 				<?php
 				}
-				if ($options['ucpt_manage_priority_3'] != "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_3'] != "") {
 				?>
-				<option value="<?php echo $options['ucpt_manage_priority_3']; ?>"><?php echo $options['ucpt_manage_priority_3']; ?></option>
+				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_3']; ?></option>
 				<?php
 				}
-				if ($options['ucpt_manage_priority_4'] != "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_4'] != "") {
 				?>
-				<option value="<?php echo $options['ucpt_manage_priority_4']; ?>"><?php echo $options['ucpt_manage_priority_4']; ?></option>
+				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_4']; ?></option>
 				<?php
 				}
-				if ($options['ucpt_manage_priority_5'] != "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_5'] != "") {
 				?>
-				<option value="<?php echo $options['ucpt_manage_priority_5']; ?>"><?php echo $options['ucpt_manage_priority_5']; ?></option>
+				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_5']; ?></option>
 				<?php
 				}
-				if ($options['ucpt_manage_priority_1'] == "") {
+				if ($ucpt_focus_options['ucpt_manage_priority_1'] == "") {
 				?>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
 				<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
@@ -84,13 +89,13 @@ global $bp, $wpdb;
 				?>
 			</select>
 
-		<label style="color: #fff;" for="ucpt_date_start">Estimated Implementation Date</label>
+		<label for="ucpt_date_start"><b style="font-size: 110%;">Estimated Implementation Date</b></label>
 			<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field('ucpt_date_start'); ?>" />
 
-		<label style="color: #fff;" for="ucpt_date_end">Estimated Completion Date</label>
+		<label for="ucpt_date_end"><b style="font-size: 110%;">Estimated Completion Date</b></label>
 			<input id="ucpt_date_end" type="date" name="ucpt_date_end" value="<?php echo custom_field('ucpt_date_end'); ?>" />
 
-		<label style="color: #fff;" for="ucpt_cis_ease">Estimated Ease of Implementation</label>
+		<label for="ucpt_cis_ease"><b style="font-size: 110%;">Estimated Ease of Implementation</b></label>
 			<select name="ucpt_cis_ease">
 				<option value="<?php echo custom_field(ucpt_cis_ease); ?>"><?php echo custom_field(ucpt_cis_ease); ?></option>
 				<option value="Very Easy">Very Easy</option>
@@ -100,7 +105,7 @@ global $bp, $wpdb;
 				<option value="Very Hard">Very Hard</option>
 			</select>
 
-		<label style="color: #fff;" for="ucpt_cis_cost">Estimated Cost of Implementation</label>
+		<label for="ucpt_cis_cost"><b style="font-size: 110%;">Estimated Cost of Implementation</b></label>
 			<select name="ucpt_cis_cost">
 				<option value="<?php echo custom_field(ucpt_cis_cost); ?>"><?php echo custom_field(ucpt_cis_cost); ?></option>
 				<option value="Very Low">Very Low</option>
@@ -110,7 +115,7 @@ global $bp, $wpdb;
 				<option value="Very High">Very High</option>
 			</select>
 
-		<label style="color: #fff;" for="ucpt_cis_benefit">Estimated Potential Community Benefit</label>
+		<label for="ucpt_cis_benefit"><b style="font-size: 110%;">Estimated Potential Community Benefit</b></label>
 			<select name="ucpt_cis_benefit">
 				<option value="<?php echo custom_field(ucpt_cis_benefit); ?>"><?php echo custom_field(ucpt_cis_benefit); ?></option>
 				<option value="Very High">Very High</option>
@@ -120,12 +125,13 @@ global $bp, $wpdb;
 				<option value="Very Low">Very Low</option>
 			</select>
 
-		<label style="color: #fff;" for="ucpt_research">Research</label>
-			<textarea id="ucpt_research" name="ucpt_research"><?php echo custom_field('ucpt_research'); ?></textarea>
+		<label for="ucpt_research"><b style="font-size: 110%;">Research</b></label>
+			<?php wp_editor( custom_field('ucpt_research'), 'ucpt_research', $editor_settings ); ?> 
 	<br />
 </div>
 <?php
 //////////////////// End Front-End Output
+
 //////////////////// Insert Group Meta
 // This saves the custom group meta – props to Boone for the function
 // Where $plain_fields = array.. you may add additional fields, eg
@@ -134,7 +140,7 @@ global $bp, $wpdb;
 //      'field-two'
 //  );
 }
-function group_header_fields_save( $group_id ) {
+function ucpt_strategy_fields_save( $group_id ) {
 	global $bp, $wpdb;
 	$plain_fields = array(
 		'ucpt_goal',
@@ -146,46 +152,32 @@ function group_header_fields_save( $group_id ) {
 		'ucpt_cis_ease',
 		'ucpt_cis_cost',
 		'ucpt_cis_benefit',
-		'ucpt_measure_1',
-		'ucpt_measure_2',
-		'ucpt_measure_3',
 		'ucpt_research'
 	);
+
 	foreach( $plain_fields as $field ) {
 		$key = $field;
 		if ( isset( $_POST[$key] ) ) {
-			$value = $_POST[$key];
+			$value = strip_tags($_POST[$key]);
 			groups_update_groupmeta( $group_id, $field, $value );
 		}
+
 	}
 }
-add_filter( 'groups_custom_group_fields_editable', 'group_header_fields_markup' );
-add_action( 'groups_group_details_edited', 'group_header_fields_save' );
-add_action( 'groups_created_group',  'group_header_fields_save' );
+
+add_filter( 'groups_custom_group_fields_editable', 'ucpt_strategy_fields_markup' );
+add_action( 'groups_group_details_edited', 'ucpt_strategy_fields_save' );
+add_action( 'groups_created_group',  'ucpt_strategy_fields_save' );
 //////////////////// Insert Group Meta
+
 //////////////////// Begin Header Output
 // Show the custom field in the group header
-function show_field_in_header( ) {
-	if (custom_field('ucpt_goal') != "") {
-		echo "<p><b>Goal: " . custom_field('ucpt_goal') . "</b></p>";
-	}
-	if (custom_field('ucpt_focus') != "") {
-		echo "<p>Primary Focus Area: " . custom_field('ucpt_focus') . "</p>";
-	}
-	if (custom_field('ucpt_measure_1') != "") {
-		echo "<p>Primary Measure: " . custom_field('ucpt_measure_1') . "</p>";
-	}
-	if (custom_field('ucpt_measure_2') != "") {
-		echo "<p>Secondary Measure: " . custom_field('ucpt_measure_2') . "</p>";
-	}
-	if (custom_field('ucpt_measure_3') != "") {
-		echo "<p>Tertiary Measure: " . custom_field('ucpt_measure_3') . "</p>";
-	}	
+
 }
-add_action('bp_group_header_meta' , 'show_field_in_header') ;
-}
-add_action( 'bp_include', 'bp_group_meta_init' );
-function add_page_to_group() {
+
+add_action( 'bp_include', 'bp_group_meta_init_strategy' );
+
+function ucpt_strategy_page() {
 	if ( class_exists( 'BP_Group_Extension' ) ) :
 		class UCPT_Pages extends BP_Group_Extension {
 			function __construct() {
@@ -196,35 +188,84 @@ function add_page_to_group() {
 				);
 				parent::init( $args );
 			}
-			function settings_screen( $group_id = null ) {
+			function settings_screen( $group_id ) {
 				// don't remove this function
 				echo "Additional settings are planned for the future. Stay tuned!";
 			}    
-			function display( $group_id = null ) {
+			function display() {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
+				$group_cover_image_url = bp_attachments_get_attachment('url', array(
+					  'object_dir' => 'groups',
+					  'item_id' => bp_get_group_id(),
+					));
+					$ucpt_cover = $group_cover_image_url;
+					$ucpt_group_name = bp_get_group_name();
+					$ucpt_perma = bp_get_group_permalink( $bp->groups->current_group );
+					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Health Improvement Strategy</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
 				if (custom_field('ucpt_goal') == "") {
-					echo "This group is not currently working on a strategy, or has not yet filled out their goal.";
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p>This group is not currently working on a strategy, or has not yet filled out their goal.</p>";
+					echo "</div>";
 				}
 				if (custom_field('ucpt_goal') != "") {
-					echo "<p><b>Goal: " . custom_field('ucpt_goal') . "</b></p>";
-					echo "<p>Strategy Description: " . custom_field('ucpt_desc') . "</p>";
-					echo "<p>Level of Change: " . custom_field('ucpt_level') . "</p>";
-					echo "<p>Primary Focus Area: " . custom_field('ucpt_focus') . "</p>";
-					echo "<p>Estimated Implementation Date: " . custom_field('ucpt_date_start') . "</p>";
-					echo "<p>Estimated Completion Date: " . custom_field('ucpt_date_end') . "</p>";
-					echo "<p>Estimated Ease of Implementation: " . custom_field('ucpt_cis_ease') . "</p>";
-					echo "<p>Estimated Cost of Implementation: " . custom_field('ucpt_cis_cost') . "</p>";
-					echo "<p>Potential Community Benefit: " . custom_field('ucpt_cis_benefit') . "</p>";
-					echo "<p>Research: " . custom_field('ucpt_research') . "</p>";
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Goal:</b> " . custom_field('ucpt_goal') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_desc') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Strategy Description:</b> " . custom_field('ucpt_desc') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_level') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Level of Change:</b> " . custom_field('ucpt_level') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_focus') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Primary Focus Area:</b> " . custom_field('ucpt_focus') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_date_start') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Estimated Implementation Date:</b> " . custom_field('ucpt_date_start') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_date_end') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Estimated Completion Date:</b> " . custom_field('ucpt_date_end') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_cis_ease') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Estimated Ease of Implementation:</b> " . custom_field('ucpt_cis_ease') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_cis_cost') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Estimated Cost of Implementation:</b> " . custom_field('ucpt_cis_cost') . "</p>";
+					echo "</div>";
+				}
+				if (custom_field('ucpt_cis_benefit') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Potential Community Benefit:</b> " . custom_field('ucpt_cis_benefit') . "</p>";
+					echo "</div>";
+				}	
+				if (custom_field('ucpt_research') != "") {
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Research:</b> " . custom_field('ucpt_research') . "</p>";
+					echo "</div>";
 				}
 			}
 		} // end of class
+
 		bp_register_group_extension( 'UCPT_Pages' );
 		 
 		endif;
 }
 	
-add_filter('bp_groups_default_extension', 'add_page_to_group' );
+add_filter('bp_groups_default_extension', 'ucpt_strategy_page' );
 	
 ?>
