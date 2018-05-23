@@ -1,2 +1,2 @@
 # Tutorials
-Examples of UCPT framework plug-in modifications illustrated on EquityEngage.com will be housed in this folder for reference, replication, and extension.
+See usage examples of the Universal Community Planning Tool, including module modification at https://equityengage.com/articles/
