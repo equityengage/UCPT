@@ -17,7 +17,7 @@ register_activation_hook( __FILE__, 'ucpt_modules' );
 function ucpt_modules(){
 
     // Require parent plugin
-    if ( ! is_plugin_active( 'ucpt-manager-module/upct-manager-module.php' ) and current_user_can( 'activate_plugins' ) ) {
+    if ( ! is_plugin_active( 'ucpt-manager-module/upct-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
         // Stop activation redirect and show error
         wp_die('Whoops! This plug-in requires the UCPT Manager Module to be installed and active. Please activate the UCPT Manager Module, and then reactivate this plug-in. If you have activated both plug-ins at the same time and are seeing this error, please try activating the UCPT Manager Module first, and then activate any selected modules. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
