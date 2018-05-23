@@ -722,9 +722,6 @@ function add_page_to_group_data() {
 					</table>
 				</div>
 				</div>
-				<?php 
-					if (custom_field_data('ucpt_data_narrative') != "") {
-				?>
 				<p>
 				<h3>Data Narrative</h3>
 				</p>
@@ -732,11 +729,8 @@ function add_page_to_group_data() {
 					<?php echo custom_field_data('ucpt_data_narrative'); ?>
 				</p>
 				<?php
-					}
-					
 				$chart_id = substr(md5(rand()), 0, 6);
 				?>
-					
 				<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 				<canvas id="<?php echo $chart_id; ?>"></canvas>
 				<script>
@@ -1002,6 +996,5 @@ function add_page_to_group_data() {
 		endif;
 }
 	
-add_filter('bp_groups_default_extension', 'add_page_to_group_data' );
-	
+add_filter('bp_groups_default_extension', 'add_page_to_group_data' );	
 ?>
