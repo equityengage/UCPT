@@ -11,6 +11,18 @@ Author: UCPT
 Author URI: https://equityengage.com
 */
 
+// https://wordpress.stackexchange.com/questions/127818/how-to-make-a-plugin-require-another-plugin?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+register_activation_hook( __FILE__, 'ucpt_modules' );
+function ucpt_modules(){
+
+    // Require parent plugin
+    if ( ! is_plugin_active( 'ucpt-manager-module/upct-manager-module.php' ) and current_user_can( 'activate_plugins' ) ) {
+        // Stop activation redirect and show error
+        wp_die('Whoops! This plug-in requires the UCPT Manager Module to be installed and active. Please activate the UCPT Manager Module, and then reactivate this plug-in. If you have activated both plug-ins at the same time and are seeing this error, please try activating the UCPT Manager Module first, and then activate any selected modules. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+    }
+}
+
 //////////////////// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
 function bp_group_meta_init_strategy() {
 function custom_field($meta_key='') {
