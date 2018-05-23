@@ -7,22 +7,24 @@ The WordPress plug-ins contained within this repository are working, deployable 
 
 The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-by-step implementation instructions can be found on EquityEngage.com.
 
-This project is coordinated by the Garrett County Health Department, and is supported by PHNCI, a division of PHAB, with support from the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
+This project is coordinated by the Garrett County Health Department, with support from PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
 
+# v8.01 - UCPT Major Release
+6/1/2018 - v8.01 - UCPT Release
+The Universal Community Planning Tool modules have been recoded from the ground up to vastly improve functionality through the addition of several new features and the use of loops driven by the UCPT Manager Module. This release is considered a major milestone, and has been prepared in advance for replication communities to begin utilizing this code. Please note that future release candidates <b>are</b> compatible with this release.
+
 # v1.1 - UCPT Release Candidate 1.1
+3/22/2018 - v1.1 - UCPT Release Candidate 1.1
 The release currently contained within the Core-Modules folder is an improved release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # v1.0 - UCPT Release Candidate 1.0
+1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 The release currently contained within the Core-Modules folder is an initial release candidate for communities to begin using the core modules in their community. Please note that future release candidates <b>are</b> compatible with this release.
 
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with frequent updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
-
-3/22/2018 - v1.1 - UCPT Release Candidate 1.1
-
-1/31/2018 - v1.0 - UCPT Release Candidate 1.0
 
 # Projects
 <ul>
