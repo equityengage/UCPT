@@ -3,14 +3,13 @@
 Plugin Name: UCPT Manager Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting UCPT driver plug-ins with additional variables
-Version: 1.1
+Version: 8.01
 Requires at least: 3.3
 Tested up to: 4.8.1
 License: GPL v3
 Author: UCPT
 Author URI: https://equityengage.com
 */
-//////////////////// Currently under development - install now to receive plug-in functionality upon completion.
 
 //////////////////// WP Codex - BP Active Check
 
@@ -87,6 +86,23 @@ function ucpt_manage_settings_init(  ) {
 		'pluginPage', 
 		'ucpt_manage_pluginPage_section' 
 	);
+	
+	add_settings_field( 
+		'ucpt_manage_start_date', 
+		__( 'UCPT Data Start Date', 'ucpt_manage' ), 
+		'ucpt_manage_start_date_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_measure_number', 
+		__( 'UCPT Measure Number', 'ucpt_manage' ), 
+		'ucpt_manage_measure_number_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+
 
 
 }
@@ -137,6 +153,24 @@ function ucpt_manage_priority_5_render(  ) {
 	$options = get_option( 'ucpt_manage_settings' );
 	?>
 	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_5]' value='<?php echo $options['ucpt_manage_priority_5']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_start_date_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='date' name='ucpt_manage_settings[ucpt_manage_start_date]' value='<?php echo $options['ucpt_manage_start_date']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_measure_number_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='number' name='ucpt_manage_settings[ucpt_manage_measure_number]' max='15' value='<?php echo $options['ucpt_manage_measure_number']; ?>'>
 	<?php
 
 }
