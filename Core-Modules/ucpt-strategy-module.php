@@ -219,53 +219,33 @@ function ucpt_strategy_page() {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p>This group is not currently working on a strategy, or has not yet filled out their goal.</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_goal') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Goal:</b> " . custom_field('ucpt_goal') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_desc') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Strategy Description:</b> " . custom_field('ucpt_desc') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_level') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Level of Change:</b> " . custom_field('ucpt_level') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_focus') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Primary Focus Area:</b> " . custom_field('ucpt_focus') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_date_start') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Estimated Implementation Date:</b> " . custom_field('ucpt_date_start') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_date_end') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Estimated Completion Date:</b> " . custom_field('ucpt_date_end') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_cis_ease') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Estimated Ease of Implementation:</b> " . custom_field('ucpt_cis_ease') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_cis_cost') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Estimated Cost of Implementation:</b> " . custom_field('ucpt_cis_cost') . "</p>";
 					echo "</div>";
-				}
-				if (custom_field('ucpt_cis_benefit') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Potential Community Benefit:</b> " . custom_field('ucpt_cis_benefit') . "</p>";
 					echo "</div>";
-				}	
-				if (custom_field('ucpt_research') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Research:</b> " . custom_field('ucpt_research') . "</p>";
 					echo "</div>";
