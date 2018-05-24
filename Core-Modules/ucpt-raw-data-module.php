@@ -759,6 +759,9 @@ add_action( 'bp_include', 'bp_group_meta_init_data' );
 				<p>
 					<?php echo custom_field_data('ucpt_data_narrative'); ?>
 				</p>
+				<p>
+				<h3>Data Visualization</h3>
+				</p>
 				<?php
 				$chart_id = substr(md5(rand()), 0, 6);
 				?>
