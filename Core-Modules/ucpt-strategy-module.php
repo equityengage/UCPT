@@ -13,17 +13,18 @@ Author URI: https://equityengage.com
 
 // https://wordpress.stackexchange.com/questions/127818/how-to-make-a-plugin-require-another-plugin?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-register_activation_hook( __FILE__, 'ucpt_modules' );
-function ucpt_modules(){
+register_activation_hook( __FILE__, 'ucpt_modules_strategy' );
+function ucpt_modules_strategy(){
 
     // Require parent plugin
-    if ( ! is_plugin_active( 'ucpt-manager-module/upct-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
+    if ( ! is_plugin_active( 'ucpt-manager-module/ucpt-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
         // Stop activation redirect and show error
         wp_die('Whoops! This plug-in requires the UCPT Manager Module to be installed and active. Please activate the UCPT Manager Module, and then reactivate this plug-in. If you have activated both plug-ins at the same time and are seeing this error, please try activating the UCPT Manager Module first, and then activate any selected modules. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
 }
 
-//////////////////// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
+// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
+
 function bp_group_meta_init_strategy() {
 function custom_field($meta_key='') {
 
@@ -34,9 +35,11 @@ return groups_get_groupmeta( bp_get_group_id(), $meta_key) ;
 // This function is our custom field's form that is called in create a group and when editing group details
 function ucpt_strategy_fields_markup() {
 global $bp, $wpdb;
-//////////////////// End BuddyPress Group Meta Management
 
-//////////////////// Front-End Output
+// End BuddyPress Group Meta Management
+
+// Front-End Editor Output
+
 $editor_settings = array( 'media_buttons' => false );
 ?>
 
@@ -61,6 +64,7 @@ $editor_settings = array( 'media_buttons' => false );
 		<?php
 		$ucpt_focus_options = get_option( 'ucpt_manage_settings' );
 		?>
+		
 		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
@@ -109,7 +113,7 @@ $editor_settings = array( 'media_buttons' => false );
 
 		<label for="ucpt_cis_ease"><b style="font-size: 110%;">Estimated Ease of Implementation</b></label>
 			<select name="ucpt_cis_ease">
-				<option value="<?php echo custom_field(ucpt_cis_ease); ?>"><?php echo custom_field(ucpt_cis_ease); ?></option>
+				<option value="<?php echo custom_field('ucpt_cis_ease'); ?>"><?php echo custom_field('ucpt_cis_ease'); ?></option>
 				<option value="Very Easy">Very Easy</option>
 				<option value="Easy">Easy</option>
 				<option value="Moderate">Moderate</option>
@@ -119,7 +123,7 @@ $editor_settings = array( 'media_buttons' => false );
 
 		<label for="ucpt_cis_cost"><b style="font-size: 110%;">Estimated Cost of Implementation</b></label>
 			<select name="ucpt_cis_cost">
-				<option value="<?php echo custom_field(ucpt_cis_cost); ?>"><?php echo custom_field(ucpt_cis_cost); ?></option>
+				<option value="<?php echo custom_field('ucpt_cis_cost'); ?>"><?php echo custom_field('ucpt_cis_cost'); ?></option>
 				<option value="Very Low">Very Low</option>
 				<option value="Low">Low</option>
 				<option value="Moderate">Moderate</option>
@@ -129,7 +133,7 @@ $editor_settings = array( 'media_buttons' => false );
 
 		<label for="ucpt_cis_benefit"><b style="font-size: 110%;">Estimated Potential Community Benefit</b></label>
 			<select name="ucpt_cis_benefit">
-				<option value="<?php echo custom_field(ucpt_cis_benefit); ?>"><?php echo custom_field(ucpt_cis_benefit); ?></option>
+				<option value="<?php echo custom_field('ucpt_cis_benefit'); ?>"><?php echo custom_field('ucpt_cis_benefit'); ?></option>
 				<option value="Very High">Very High</option>
 				<option value="High">High</option>
 				<option value="Moderate">Moderate</option>
@@ -141,10 +145,12 @@ $editor_settings = array( 'media_buttons' => false );
 			<?php wp_editor( custom_field('ucpt_research'), 'ucpt_research', $editor_settings ); ?> 
 	<br />
 </div>
-<?php
-//////////////////// End Front-End Output
 
-//////////////////// Insert Group Meta
+<?php
+
+// End Front-End Editor Output
+
+// Insert Group Meta
 // This saves the custom group meta – props to Boone for the function
 // Where $plain_fields = array.. you may add additional fields, eg
 //  $plain_fields = array(
@@ -152,6 +158,7 @@ $editor_settings = array( 'media_buttons' => false );
 //      'field-two'
 //  );
 }
+
 function ucpt_strategy_fields_save( $group_id ) {
 	global $bp, $wpdb;
 	$plain_fields = array(
@@ -180,31 +187,50 @@ function ucpt_strategy_fields_save( $group_id ) {
 add_filter( 'groups_custom_group_fields_editable', 'ucpt_strategy_fields_markup' );
 add_action( 'groups_group_details_edited', 'ucpt_strategy_fields_save' );
 add_action( 'groups_created_group',  'ucpt_strategy_fields_save' );
-//////////////////// Insert Group Meta
-
-//////////////////// Begin Header Output
-// Show the custom field in the group header
-
 }
+
+// End Insert Group Meta
+
+// Add Meta Management Action
 
 add_action( 'bp_include', 'bp_group_meta_init_strategy' );
 
-function ucpt_strategy_page() {
-	if ( class_exists( 'BP_Group_Extension' ) ) :
-		class UCPT_Pages extends BP_Group_Extension {
-			function __construct() {
-				$args = array(
-					'slug' => 'strategy',
-					'name' => 'Strategy',
-					'create_step_position' => 21
-				);
-				parent::init( $args );
-			}
-			function settings_screen( $group_id ) {
-				// don't remove this function
-				echo "Additional settings are planned for the future. Stay tuned!";
-			}    
-			function display( $group_id = null ) {
+// End Meta Management Action
+
+// Front-End Display
+// https://premium.wpmudev.org/forums/topic/adding-a-new-tab-with-group-desciption
+	
+	function add_ucpt_strategy_page(){
+	global $bp;
+
+	bp_core_new_subnav_item( array(
+	'name' => 'Strategy',
+	'slug' => 'strategy',
+	'parent_slug' => $bp->groups->current_group->slug,
+	'parent_url' => bp_get_group_permalink( $bp->groups->current_group ),
+	'screen_function' => 'ucpt_strategy_show',
+	'position' => 40 ) );
+	}
+	add_action( 'wp', 'add_ucpt_strategy_page');
+
+	function ucpt_strategy_show() {
+
+	add_action( 'bp_template_title', 'ucpt_strategy_show_title' );
+	add_action( 'bp_template_content', 'ucpt_strategy_screen' );
+
+	$templates = array('groups/single/plugins.php','plugin-template.php');
+	if( strstr( locate_template($templates), 'groups/single/plugins.php' ) ) {
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'groups/single/plugins' ) );
+	} else {
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'plugin-template' ) );
+	}
+	}
+
+	function ucpt_strategy_show_title() {
+	echo 'Strategy';
+	}
+
+	function ucpt_strategy_screen( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				$group_cover_image_url = bp_attachments_get_attachment('url', array(
@@ -215,10 +241,7 @@ function ucpt_strategy_page() {
 					$ucpt_group_name = bp_get_group_name();
 					$ucpt_perma = bp_get_group_permalink( $bp->groups->current_group );
 					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Health Improvement Strategy</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
-				if (custom_field('ucpt_goal') == "") {
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p>This group is not currently working on a strategy, or has not yet filled out their goal.</p>";
-					echo "</div>";
+				if (custom_field('ucpt_goal') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Goal:</b> " . custom_field('ucpt_goal') . "</p>";
 					echo "</div>";
@@ -250,14 +273,8 @@ function ucpt_strategy_page() {
 					echo "<p><b>Research:</b> " . custom_field('ucpt_research') . "</p>";
 					echo "</div>";
 				}
-			}
-		} // end of class
+			}	
+			
+// End Front-End Display
 
-		bp_register_group_extension( 'UCPT_Pages' );
-		 
-		endif;
-}
-	
-add_filter('bp_groups_default_extension', 'ucpt_strategy_page' );
-	
 ?>
