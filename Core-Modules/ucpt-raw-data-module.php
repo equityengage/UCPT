@@ -47,7 +47,7 @@ $editor_settings = array( 'media_buttons' => false );
 					position: absolute;
 					width: 250px;
 					background-color: #f1f1f1;
-					z-index: 99999;
+					overflow-x:auto;
 				}
 				table {
 					table-layout: fixed; 
@@ -61,7 +61,7 @@ $editor_settings = array( 'media_buttons' => false );
 	<p>The purpose of this planning tool is to collect community data for comparison, tracking, and overall community health improvement. Data plays a critical role in ensuring that our strategies are effective, and can be correlated to specific actions within the community. Data must be numerical to allow for cross comparison of variables.</p></span>
 	<br />
 	<div style="overflow-x:auto; background-color:#fff; padding:10px;">
-	<table border="1" bordercolor="#ededed" width="100%" cellpadding="5" class="table table-striped">
+	<table border="1" bordercolor="#ededed" width="100%" class="table table-striped">
 			<tr>
 				<th class="sticky">Measurements</th>
 				<th style="width: 250px;"></th>
@@ -305,7 +305,10 @@ $editor_settings = array( 'media_buttons' => false );
 				}
 			?>
 		</table>
-		<p>
+		</div>
+	<br />
+	<div style="background-color:#fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
+	<p>
 	<h3>Data Narrative</h3>
 	</p>
 	<p>
@@ -495,6 +498,7 @@ add_action( 'bp_include', 'bp_group_meta_init_data' );
 					position: absolute;
 					width: 250px;
 					background-color: #f1f1f1;
+					overflow-x:auto;
 				}
 				table {
 					table-layout: fixed; 
@@ -505,7 +509,7 @@ add_action( 'bp_include', 'bp_group_meta_init_data' );
 				</style>
 				<div style="background-color:#009150; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 				<div style="overflow-x:auto; background-color:#fff; padding:10px;">
-					<table border="1" bordercolor="#ededed" width="100%" cellpadding="5" class="table table-striped">
+					<table border="1" bordercolor="#ededed" width="100%" class="table table-striped">
 							<tr>
 								<th class="sticky">Measurements</th>
 								<th style="width: 250px;"></th>
