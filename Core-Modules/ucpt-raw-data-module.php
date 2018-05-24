@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: UCPT Raw Data Module for 2020 Goals
+Plugin Name: UCPT Raw Data Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of raw data reporting to BuddyPress groups.
 Version: 8.01
@@ -13,17 +13,18 @@ Author URI: https://equityengage.com
 
 // https://wordpress.stackexchange.com/questions/127818/how-to-make-a-plugin-require-another-plugin?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-register_activation_hook( __FILE__, 'ucpt_modules' );
-function ucpt_modules(){
+register_activation_hook( __FILE__, 'ucpt_modules_data' );
+function ucpt_modules_data(){
 
     // Require parent plugin
-    if ( ! is_plugin_active( 'ucpt-manager-module/upct-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
+    if ( ! is_plugin_active( 'ucpt-manager-module/ucpt-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
         // Stop activation redirect and show error
         wp_die('Whoops! This plug-in requires the UCPT Manager Module to be installed and active. Please activate the UCPT Manager Module, and then reactivate this plug-in. If you have activated both plug-ins at the same time and are seeing this error, please try activating the UCPT Manager Module first, and then activate any selected modules. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
 }
 
-//////////////////// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
+// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
+
 function bp_group_meta_init_data() {
 function custom_field_data($meta_key='') {
 
@@ -32,11 +33,13 @@ return groups_get_groupmeta( bp_get_group_id(), $meta_key) ;
 }
 
 // This function is our custom field's form that is called in create a group and when editing group details
-function group_header_fields_markup_data() {
+function ucpt_raw_data_fields_markup_data() {
 global $bp, $wpdb;
-//////////////////// End BuddyPress Group Meta Management
 
-//////////////////// Front-End Output
+// End BuddyPress Group Meta Management
+
+// Front-End Editor Output
+
 $editor_settings = array( 'media_buttons' => false );
 ?>
 		<style>
@@ -129,172 +132,172 @@ $editor_settings = array( 'media_buttons' => false );
 				?>
 			<tr>
 				<td class="sticky">
-					<input id="ucpt_measure_<?php echo $measure_count; ?>" type="text" name="ucpt_measure_<?php echo $measure_count; ?>" placeholder="Measure <?php echo $measure_count; ?>" value="<?php echo custom_field_data(ucpt_measure_ . $measure_count ); ?>" style="width: 250px"/>
+					<input id="ucpt_measure_<?php echo $measure_count; ?>" type="text" name="ucpt_measure_<?php echo $measure_count; ?>" placeholder="Measure <?php echo $measure_count; ?>" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count); ?>" style="width: 250px"/>
 				</td>
 				<td></td>
 				<td>
-					<input id="ucpt_measure_<?php echo $measure_count; ?>_goal" type="number" name="ucpt_measure_<?php echo $measure_count; ?>_goal" placeholder="Target Goal" value="<?php echo custom_field_data(ucpt_measure_ . $measure_count ._goal); ?>" style="width: 250px"/>
+					<input id="ucpt_measure_<?php echo $measure_count; ?>_goal" type="number" name="ucpt_measure_<?php echo $measure_count; ?>_goal" placeholder="Target Goal" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>" style="width: 250px"/>
 				</td>
 				<td>
 				<select name="ucpt_measure_<?php echo $measure_count; ?>_status">
-					<option value="<?php echo custom_field(ucpt_measure_ . $measure_count . _status); ?>"><?php echo custom_field(ucpt_measure_ . $measure_count . _status); ?></option>
+					<option value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_status'); ?>"><?php echo custom_field_data('ucpt_measure_' . $measure_count . '_status'); ?></option>
 					<option value="Active">Active</option>
 					<option value="Archived">Archived</option>
 				</select>
 				</td>
 				<td>
 				<select name="ucpt_measure_<?php echo $measure_count; ?>_trend">
-					<option value="<?php echo custom_field(ucpt_measure_ . $measure_count . _trend); ?>"><?php echo custom_field(ucpt_measure_ . $measure_count . _trend); ?></option>
+					<option value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_trend'); ?>"><?php echo custom_field_data('ucpt_measure_' . $measure_count . '_trend'); ?></option>
 					<option value="Increase">Increase</option>
 					<option value="Decrease">Decrease</option>
 				</select>
 				</td>
 				<td>
-					<input id="ucpt_measure_<?php echo $measure_count; ?>_contributor" type="text" name="ucpt_measure_<?php echo $measure_count; ?>_contributor" placeholder="Person, agency, etc..." value="<?php echo custom_field_data(ucpt_measure_ . $measure_count ._contributor); ?>" />
+					<input id="ucpt_measure_<?php echo $measure_count; ?>_contributor" type="text" name="ucpt_measure_<?php echo $measure_count; ?>_contributor" placeholder="Person, agency, etc..." value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_contributor'); ?>" />
 				</td>				
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m1" placeholder="Baseline" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m1); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m1" placeholder="Baseline" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m1'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m2" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m2); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m2'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m3" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m3); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m3'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m4" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m4); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m4'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m5" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m5); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m5'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m6" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m6); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m6'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m7" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m7); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m7'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m8" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m8); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m8'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m9" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m9); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m9'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m10" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m10); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m10'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m11" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m11); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m11'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m12" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y1_m12); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y1_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m12'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m1" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m1); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m1'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m2" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m2); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m2'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m3" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m3); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m3'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m4" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m4); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m4'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m5" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m5); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m5'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m6" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m6); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m6'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m7" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m7); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m7'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m8" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m8); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m8'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m9" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m9); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m9'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m10" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m10); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m10'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m11" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m11); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m11'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m12" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y2_m12); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y2_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m12'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m1" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m1); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m1'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m2" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m2); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m2'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m3" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m3); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m3'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m4" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m4); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m4'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m5" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m5); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m5'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m6" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m6); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m6'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m7" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m7); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m7'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m8" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m8); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m8'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m9" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m9); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m9'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m10" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m10); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m10'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m11" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m11); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m11'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m12" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y3_m12); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y3_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m12'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m1" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m1); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m1" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m1'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m2" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m2); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m2" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m2'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m3" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m3); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m3" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m3'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m4" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m4); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m4" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m4'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m5" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m5); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m5" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m5'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m6" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m6); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m6" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m6'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m7" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m7); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m7" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m7'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m8" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m8); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m8" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m8'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m9" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m9); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m9" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m9'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m10" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m10); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m10" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m10'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m11" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m11); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m11" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m11'); ?>" />
 				</td>
 				<td>
-					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m12" value="<?php echo custom_field_data(ucpt_m_ . $measure_count . _y4_m12); ?>" />
+					<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m12" type="number" name="ucpt_m_<?php echo $measure_count; ?>_y4_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m12'); ?>" />
 				</td>
 			</tr>
 			<?php 
@@ -316,23 +319,25 @@ $editor_settings = array( 'media_buttons' => false );
 	</p>
 	<p>
 		<input id="ucpt_data_edit" type="text" name="ucpt_data_edit" readonly="readonly" value="<?php echo $editor_record; ?> edited this group on <?php echo date("F d, Y"); ?>." />
-		<input id="ucpt_data_edit_log" type="hidden" name="ucpt_data_edit_log" readonly="readonly" value="<?php echo custom_field_data(ucpt_data_edit_log); ?>" />
+		<input id="ucpt_data_edit_log" type="hidden" name="ucpt_data_edit_log" readonly="readonly" value="<?php echo custom_field_data('ucpt_data_edit_log'); ?>" />
 	</p>
 	</div>
 	<br />
 </div>
 <?php
-//////////////////// End Front-End Output
 
-//////////////////// Insert Group Meta
+// End Front-End Editor Output
+
+// Insert Group Meta
 // This saves the custom group meta â€“ props to Boone for the function
 // Where $plain_fields = array.. you may add additional fields, eg
 //  $plain_fields = array(
 //      'field-one',
 //      'field-two'
 //  );
+
 }
-function group_header_fields_save_data( $group_id ) {
+function ucpt_raw_data_fields_save_data( $group_id ) {
 	global $bp, $wpdb;
 	
 	$ucpt_measures_options = get_option( 'ucpt_manage_settings' );
@@ -341,7 +346,7 @@ function group_header_fields_save_data( $group_id ) {
 	while ($measure_count <= $max_measures) {
 		
 		$plain_fields = array(
-			'ucpt_measure_' . $measure_count . '',
+			'ucpt_measure_' . $measure_count,
 			'ucpt_measure_' . $measure_count . '_goal',
 			'ucpt_measure_' . $measure_count . '_status',
 			'ucpt_measure_' . $measure_count . '_trend',
@@ -421,31 +426,53 @@ function group_header_fields_save_data( $group_id ) {
 		
 }
 	
-add_filter( 'groups_custom_group_fields_editable', 'group_header_fields_markup_data' );
-add_action( 'groups_group_details_edited', 'group_header_fields_save_data' );
-add_action( 'groups_created_group',  'group_header_fields_save_data' );
-//////////////////// Insert Group Meta
-
+add_filter( 'groups_custom_group_fields_editable', 'ucpt_raw_data_fields_markup_data' );
+add_action( 'groups_group_details_edited', 'ucpt_raw_data_fields_save_data' );
+add_action( 'groups_created_group',  'ucpt_raw_data_fields_save_data' );
 }
+
+// End Insert Group Meta
+
+// Add Meta Management Action
 
 add_action( 'bp_include', 'bp_group_meta_init_data' );
 
-function add_page_to_group_data() {
-	if ( class_exists( 'BP_Group_Extension' ) ) :
-		class UCPT_Data_Pages extends BP_Group_Extension {
-			function __construct() {
-				$args = array(
-					'slug' => 'raw-data',
-					'name' => 'Raw Data +',
-					'create_step_position' => 20
-				);
-				parent::init( $args );
-			}
-			function settings_screen( $group_id ) {
-				// don't remove this function
-				echo "Additional settings are planned for the future. Stay tuned!";
-			}    
-			function display( $group_id = null ) {
+// End Meta Management Action
+
+// Front-End Display
+// https://premium.wpmudev.org/forums/topic/adding-a-new-tab-with-group-desciption
+	
+	function add_ucpt_raw_data_page(){
+	global $bp;
+
+	bp_core_new_subnav_item( array(
+	'name' => 'Raw Data +',
+	'slug' => 'raw-data',
+	'parent_slug' => $bp->groups->current_group->slug,
+	'parent_url' => bp_get_group_permalink( $bp->groups->current_group ),
+	'screen_function' => 'ucpt_raw_data_show',
+	'position' => 42 ) );
+	}
+	add_action( 'wp', 'add_ucpt_raw_data_page');
+
+	function ucpt_raw_data_show() {
+
+	add_action( 'bp_template_title', 'ucpt_raw_data_show_title' );
+	add_action( 'bp_template_content', 'ucpt_raw_data_screen' );
+
+	$templates = array('groups/single/plugins.php','plugin-template.php');
+	if( strstr( locate_template($templates), 'groups/single/plugins.php' ) ) {
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'groups/single/plugins' ) );
+	} else {
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'plugin-template' ) );
+	}
+	}
+
+	function ucpt_raw_data_show_title() {
+	echo 'Raw Data +';
+	}
+
+	function ucpt_raw_data_screen() {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				if (custom_field_data('ucpt_measure_1') == "") {
@@ -989,12 +1016,7 @@ function add_page_to_group_data() {
 				<?php
 				}
 			}
-		} // end of class
+			
+// End Front-End Display
 
-		bp_register_group_extension( 'UCPT_Data_Pages' );
-		 
-		endif;
-}
-	
-add_filter('bp_groups_default_extension', 'add_page_to_group_data' );	
 ?>
