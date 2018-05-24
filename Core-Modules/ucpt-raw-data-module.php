@@ -132,11 +132,11 @@ $editor_settings = array( 'media_buttons' => false );
 				?>
 			<tr>
 				<td class="sticky">
-					<input id="ucpt_measure_<?php echo $measure_count; ?>" type="text" name="ucpt_measure_<?php echo $measure_count; ?>" placeholder="Measure <?php echo $measure_count; ?>" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count); ?>" style="width: 250px"/>
+					<input id="ucpt_measure_<?php echo $measure_count; ?>" type="text" name="ucpt_measure_<?php echo $measure_count; ?>" placeholder="Measure <?php echo $measure_count; ?>" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count); ?>" />
 				</td>
 				<td></td>
 				<td>
-					<input id="ucpt_measure_<?php echo $measure_count; ?>_goal" type="number" name="ucpt_measure_<?php echo $measure_count; ?>_goal" placeholder="Target Goal" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>" style="width: 250px"/>
+					<input id="ucpt_measure_<?php echo $measure_count; ?>_goal" type="number" name="ucpt_measure_<?php echo $measure_count; ?>_goal" placeholder="Target Goal" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>" />
 				</td>
 				<td>
 				<select name="ucpt_measure_<?php echo $measure_count; ?>_status">
