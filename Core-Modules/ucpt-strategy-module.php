@@ -26,7 +26,7 @@ function ucpt_modules_strategy(){
 // BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
 
 function bp_group_meta_init_strategy() {
-function custom_field($meta_key='') {
+function custom_field_strategy($meta_key='') {
 
 //get current group id and load meta_key value if passed. If not pass it blank
 return groups_get_groupmeta( bp_get_group_id(), $meta_key) ;
@@ -48,14 +48,14 @@ $editor_settings = array( 'media_buttons' => false );
 	<p>An innovative feature, unique to the planning tool, is the ability to dynamically track strategy progress over time. This workspace is designed for multiple stakeholders to collaborate on one specific strategy.  Please explain the specific strategy you will be measuring in the space below. <b>Expert Tip:</b> If the strategy can not be measured please consider alternative actions that can be assessed.</p>
 
 		<label for="ucpt_goal"><b style="font-size: 110%;">Goal</b></label>
-			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field('ucpt_goal'); ?>" />
+			<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field_strategy('ucpt_goal'); ?>" />
 
 		<label for="ucpt_desc"><b style="font-size: 110%;">Strategy Description</b></label>
-			<?php wp_editor( custom_field('ucpt_desc'), 'ucpt_desc', $editor_settings ); ?> 
+			<?php wp_editor( custom_field_strategy('ucpt_desc'), 'ucpt_desc', $editor_settings ); ?> 
 
 		<label for="ucpt_level"><b style="font-size: 110%;">Level of Change</b></label>
 			<select name="ucpt_level">
-				<option value="<?php echo custom_field('ucpt_level'); ?>"><?php echo custom_field('ucpt_level'); ?></option>
+				<option value="<?php echo custom_field_strategy('ucpt_level'); ?>"><?php echo custom_field_strategy('ucpt_level'); ?></option>
 				<option value="Policy">Policy</option>
 				<option value="Systems">Systems</option>
 				<option value="Programs">Program</option>
@@ -67,7 +67,7 @@ $editor_settings = array( 'media_buttons' => false );
 		
 		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
-				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
+				<option value="<?php echo custom_field_strategy('ucpt_focus'); ?>"><?php echo custom_field_strategy('ucpt_focus'); ?></option>
 				<?php
 				if ($ucpt_focus_options['ucpt_manage_priority_1'] != "") {
 				?>
@@ -106,14 +106,14 @@ $editor_settings = array( 'media_buttons' => false );
 			</select>
 
 		<label for="ucpt_date_start"><b style="font-size: 110%;">Estimated Implementation Date</b></label>
-			<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field('ucpt_date_start'); ?>" />
+			<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field_strategy('ucpt_date_start'); ?>" />
 
 		<label for="ucpt_date_end"><b style="font-size: 110%;">Estimated Completion Date</b></label>
-			<input id="ucpt_date_end" type="date" name="ucpt_date_end" value="<?php echo custom_field('ucpt_date_end'); ?>" />
+			<input id="ucpt_date_end" type="date" name="ucpt_date_end" value="<?php echo custom_field_strategy('ucpt_date_end'); ?>" />
 
 		<label for="ucpt_cis_ease"><b style="font-size: 110%;">Estimated Ease of Implementation</b></label>
 			<select name="ucpt_cis_ease">
-				<option value="<?php echo custom_field('ucpt_cis_ease'); ?>"><?php echo custom_field('ucpt_cis_ease'); ?></option>
+				<option value="<?php echo custom_field_strategy('ucpt_cis_ease'); ?>"><?php echo custom_field_strategy('ucpt_cis_ease'); ?></option>
 				<option value="Very Easy">Very Easy</option>
 				<option value="Easy">Easy</option>
 				<option value="Moderate">Moderate</option>
@@ -123,7 +123,7 @@ $editor_settings = array( 'media_buttons' => false );
 
 		<label for="ucpt_cis_cost"><b style="font-size: 110%;">Estimated Cost of Implementation</b></label>
 			<select name="ucpt_cis_cost">
-				<option value="<?php echo custom_field('ucpt_cis_cost'); ?>"><?php echo custom_field('ucpt_cis_cost'); ?></option>
+				<option value="<?php echo custom_field_strategy('ucpt_cis_cost'); ?>"><?php echo custom_field_strategy('ucpt_cis_cost'); ?></option>
 				<option value="Very Low">Very Low</option>
 				<option value="Low">Low</option>
 				<option value="Moderate">Moderate</option>
@@ -133,7 +133,7 @@ $editor_settings = array( 'media_buttons' => false );
 
 		<label for="ucpt_cis_benefit"><b style="font-size: 110%;">Estimated Potential Community Benefit</b></label>
 			<select name="ucpt_cis_benefit">
-				<option value="<?php echo custom_field('ucpt_cis_benefit'); ?>"><?php echo custom_field('ucpt_cis_benefit'); ?></option>
+				<option value="<?php echo custom_field_strategy('ucpt_cis_benefit'); ?>"><?php echo custom_field_strategy('ucpt_cis_benefit'); ?></option>
 				<option value="Very High">Very High</option>
 				<option value="High">High</option>
 				<option value="Moderate">Moderate</option>
@@ -142,7 +142,7 @@ $editor_settings = array( 'media_buttons' => false );
 			</select>
 
 		<label for="ucpt_research"><b style="font-size: 110%;">Research</b></label>
-			<?php wp_editor( custom_field('ucpt_research'), 'ucpt_research', $editor_settings ); ?> 
+			<?php wp_editor( custom_field_strategy('ucpt_research'), 'ucpt_research', $editor_settings ); ?> 
 	<br />
 </div>
 
@@ -230,7 +230,7 @@ add_action( 'bp_include', 'bp_group_meta_init_strategy' );
 	echo 'Strategy';
 	}
 
-	function ucpt_strategy_screen( $group_id = null ) {
+	function ucpt_strategy_screen() {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				$group_cover_image_url = bp_attachments_get_attachment('url', array(
@@ -241,36 +241,36 @@ add_action( 'bp_include', 'bp_group_meta_init_strategy' );
 					$ucpt_group_name = bp_get_group_name();
 					$ucpt_perma = bp_get_group_permalink( $bp->groups->current_group );
 					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Health Improvement Strategy</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
-				if (custom_field('ucpt_goal') != "") {
+				if (custom_field_strategy('ucpt_goal') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Goal:</b> " . custom_field('ucpt_goal') . "</p>";
+					echo "<p><b>Goal:</b> " . custom_field_strategy('ucpt_goal') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Strategy Description:</b> " . custom_field('ucpt_desc') . "</p>";
+					echo "<p><b>Strategy Description:</b> " . custom_field_strategy('ucpt_desc') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Level of Change:</b> " . custom_field('ucpt_level') . "</p>";
+					echo "<p><b>Level of Change:</b> " . custom_field_strategy('ucpt_level') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Primary Focus Area:</b> " . custom_field('ucpt_focus') . "</p>";
+					echo "<p><b>Primary Focus Area:</b> " . custom_field_strategy('ucpt_focus') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Implementation Date:</b> " . custom_field('ucpt_date_start') . "</p>";
+					echo "<p><b>Estimated Implementation Date:</b> " . custom_field_strategy('ucpt_date_start') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Completion Date:</b> " . custom_field('ucpt_date_end') . "</p>";
+					echo "<p><b>Estimated Completion Date:</b> " . custom_field_strategy('ucpt_date_end') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Ease of Implementation:</b> " . custom_field('ucpt_cis_ease') . "</p>";
+					echo "<p><b>Estimated Ease of Implementation:</b> " . custom_field_strategy('ucpt_cis_ease') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Cost of Implementation:</b> " . custom_field('ucpt_cis_cost') . "</p>";
+					echo "<p><b>Estimated Cost of Implementation:</b> " . custom_field_strategy('ucpt_cis_cost') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Potential Community Benefit:</b> " . custom_field('ucpt_cis_benefit') . "</p>";
+					echo "<p><b>Potential Community Benefit:</b> " . custom_field_strategy('ucpt_cis_benefit') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Research:</b> " . custom_field('ucpt_research') . "</p>";
+					echo "<p><b>Research:</b> " . custom_field_strategy('ucpt_research') . "</p>";
 					echo "</div>";
 				}
 			}	
