@@ -451,7 +451,7 @@ function ucpt_data_page() {
 				$args = array(
 					'slug' => 'raw-data',
 					'name' => 'Raw Data',
-					'create_step_position' => 20
+					'nav_item_position' => 42
 				);
 				parent::init( $args );
 			}
@@ -1009,7 +1009,7 @@ function ucpt_data_page() {
 			}
 			
 		} // end of class
-		bp_register_group_extension( 'UCPT_Pages' );
+		bp_register_group_extension( 'UCPT_Data_Pages' );
 		 
 		endif;
 	}
