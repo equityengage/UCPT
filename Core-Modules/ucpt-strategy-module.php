@@ -206,7 +206,7 @@ function ucpt_strategy_page() {
 				$args = array(
 					'slug' => 'strategy',
 					'name' => 'Strategy',
-					'create_step_position' => 21
+					'nav_item_position' => 40
 				);
 				parent::init( $args );
 			}
