@@ -198,39 +198,23 @@ add_action( 'bp_include', 'bp_group_meta_init_strategy' );
 // End Meta Management Action
 
 // Front-End Display
-// https://premium.wpmudev.org/forums/topic/adding-a-new-tab-with-group-desciption
-	
-	function add_ucpt_strategy_page(){
-	global $bp;
 
-	bp_core_new_subnav_item( array(
-	'name' => 'Strategy',
-	'slug' => 'strategy',
-	'parent_slug' => $bp->groups->current_group->slug,
-	'parent_url' => bp_get_group_permalink( $bp->groups->current_group ),
-	'screen_function' => 'ucpt_strategy_show',
-	'position' => 40 ) );
-	}
-	add_action( 'wp', 'add_ucpt_strategy_page');
-
-	function ucpt_strategy_show() {
-
-	add_action( 'bp_template_title', 'ucpt_strategy_show_title' );
-	add_action( 'bp_template_content', 'ucpt_strategy_screen' );
-
-	$templates = array('groups/single/plugins.php','plugin-template.php');
-	if( strstr( locate_template($templates), 'groups/single/plugins.php' ) ) {
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'groups/single/plugins' ) );
-	} else {
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'plugin-template' ) );
-	}
-	}
-
-	function ucpt_strategy_show_title() {
-	echo 'Strategy';
-	}
-
-	function ucpt_strategy_screen() {
+function ucpt_strategy_page() {
+	if ( class_exists( 'BP_Group_Extension' ) ) :
+		class UCPT_Pages extends BP_Group_Extension {
+			function __construct() {
+				$args = array(
+					'slug' => 'strategy',
+					'name' => 'Strategy',
+					'create_step_position' => 21
+				);
+				parent::init( $args );
+			}
+			function settings_screen( $group_id = null ) {
+				// don't remove this function
+				echo "Additional settings are planned for the future. Stay tuned!";
+			}    
+			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				$group_cover_image_url = bp_attachments_get_attachment('url', array(
@@ -273,8 +257,15 @@ add_action( 'bp_include', 'bp_group_meta_init_strategy' );
 					echo "<p><b>Research:</b> " . custom_field_strategy('ucpt_research') . "</p>";
 					echo "</div>";
 				}
-			}	
+			} 
+		} // end of class
+		bp_register_group_extension( 'UCPT_Pages' );
+		 
+		endif;
+	}
 			
+add_action( 'bp_include', 'ucpt_strategy_page' );
+
 // End Front-End Display
 
 ?>
