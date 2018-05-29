@@ -443,39 +443,23 @@ add_action( 'bp_include', 'bp_group_meta_init_data' );
 // End Meta Management Action
 
 // Front-End Display
-// https://premium.wpmudev.org/forums/topic/adding-a-new-tab-with-group-desciption
-	
-	function add_ucpt_raw_data_page(){
-	global $bp;
 
-	bp_core_new_subnav_item( array(
-	'name' => 'Raw Data +',
-	'slug' => 'raw-data',
-	'parent_slug' => $bp->groups->current_group->slug,
-	'parent_url' => bp_get_group_permalink( $bp->groups->current_group ),
-	'screen_function' => 'ucpt_raw_data_show',
-	'position' => 42 ) );
-	}
-	add_action( 'wp', 'add_ucpt_raw_data_page');
-
-	function ucpt_raw_data_show() {
-
-	add_action( 'bp_template_title', 'ucpt_raw_data_show_title' );
-	add_action( 'bp_template_content', 'ucpt_raw_data_screen' );
-
-	$templates = array('groups/single/plugins.php','plugin-template.php');
-	if( strstr( locate_template($templates), 'groups/single/plugins.php' ) ) {
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'groups/single/plugins' ) );
-	} else {
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'plugin-template' ) );
-	}
-	}
-
-	function ucpt_raw_data_show_title() {
-	echo 'Raw Data +';
-	}
-
-	function ucpt_raw_data_screen() {
+function ucpt_data_page() {
+	if ( class_exists( 'BP_Group_Extension' ) ) :
+		class UCPT_Data_Pages extends BP_Group_Extension {
+			function __construct() {
+				$args = array(
+					'slug' => 'raw-data',
+					'name' => 'Raw Data',
+					'create_step_position' => 20
+				);
+				parent::init( $args );
+			}
+			function settings_screen( $group_id = null ) {
+				// don't remove this function
+				echo "Additional settings are planned for the future. Stay tuned!";
+			}    
+			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
 				if (custom_field_data('ucpt_measure_1') == "") {
@@ -1024,6 +1008,14 @@ add_action( 'bp_include', 'bp_group_meta_init_data' );
 				}
 			}
 			
+		} // end of class
+		bp_register_group_extension( 'UCPT_Pages' );
+		 
+		endif;
+	}
+			
+add_action( 'bp_include', 'ucpt_data_page' );
+
 // End Front-End Display
 
 ?>
