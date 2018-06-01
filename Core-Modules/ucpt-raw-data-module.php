@@ -11,7 +11,7 @@ Author: UCPT
 Author URI: https://equityengage.com
 */
 
-// https://wordpress.stackexchange.com/questions/127818/how-to-make-a-plugin-require-another-plugin?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+// UCPT Active?
 
 register_activation_hook( __FILE__, 'ucpt_modules_data' );
 function ucpt_modules_data(){
@@ -23,7 +23,7 @@ function ucpt_modules_data(){
     }
 }
 
-// BuddyPress Group Meta Management: https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
+// BuddyPress Group Meta Management
 
 function bp_group_meta_init_data() {
 function custom_field_data($meta_key='') {
@@ -76,7 +76,6 @@ $editor_settings = array( 'media_buttons' => false );
 				<?php
 				$ucpt_data_time_reporting = get_option( 'ucpt_manage_settings' );
 				$ucpt_start_date_raw = $ucpt_data_time_reporting['ucpt_manage_start_date'];
-
 				$ucpt_start_date = date('Y', strtotime($ucpt_start_date_raw));
 				?>
 					<th>January <?php echo $ucpt_start_date; ?></th>
@@ -332,18 +331,10 @@ $editor_settings = array( 'media_buttons' => false );
 	<br />
 </div>
 <?php
-
+}
+	
 // End Front-End Editor Output
 
-// Insert Group Meta
-// This saves the custom group meta â€“ props to Boone for the function
-// Where $plain_fields = array.. you may add additional fields, eg
-//  $plain_fields = array(
-//      'field-one',
-//      'field-two'
-//  );
-
-}
 function ucpt_raw_data_fields_save_data( $group_id ) {
 	global $bp, $wpdb;
 	
