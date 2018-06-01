@@ -23,7 +23,7 @@ function child_plugin_activate(){
     }
 }
 
-// WordPress Options API: http://wpsettingsapi.jeroensormani.com/
+// WordPress Options API
 
 add_action( 'admin_menu', 'ucpt_manage_add_admin_menu' );
 add_action( 'admin_init', 'ucpt_manage_settings_init' );
