@@ -72,29 +72,13 @@ $editor_settings = array( 'media_buttons' => false );
 				if ($ucpt_strategy_options['ucpt_manage_priority_1'] != "") {
 				?>
 				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?></option>
-				<?php
-				}
-				if ($ucpt_strategy_options['ucpt_manage_priority_2'] != "") {
-				?>
 				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?></option>
-				<?php
-				}
-				if ($ucpt_strategy_options['ucpt_manage_priority_3'] != "") {
-				?>
 				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?></option>
-				<?php
-				}
-				if ($ucpt_strategy_options['ucpt_manage_priority_4'] != "") {
-				?>
 				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?></option>
-				<?php
-				}
-				if ($ucpt_strategy_options['ucpt_manage_priority_5'] != "") {
-				?>
 				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?></option>
 				<?php
 				}
-				if ($ucpt_strategy_options['ucpt_manage_priority_1'] == "") {
+				else {
 				?>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
 				<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
