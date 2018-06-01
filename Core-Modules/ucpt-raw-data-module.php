@@ -55,7 +55,11 @@ $editor_settings = array( 'media_buttons' => false );
 				th {
 					width: 150px;
 				}
-				</style>
+				td {
+					overflow-x:auto;
+					white-space:nowrap;
+				}
+		</style>
 	<div style="background-color:#009150; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 	<span style="color: #fff !important;"><b style="font-size: 150%;">Data Planning Worksheet</b>
 	<p>The purpose of this planning tool is to collect community data for comparison, tracking, and overall community health improvement. Data plays a critical role in ensuring that our strategies are effective, and can be correlated to specific actions within the community. Data must be numerical to allow for cross comparison of variables.</p></span>
@@ -489,6 +493,10 @@ function ucpt_data_page() {
 				}
 				th {
 					width: 150px;
+				}
+				td {
+					overflow-x:auto;
+					white-space:nowrap;
 				}
 				</style>
 				<div style="background-color:#009150; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
