@@ -62,39 +62,39 @@ $editor_settings = array( 'media_buttons' => false );
 			</select>
 
 		<?php
-		$ucpt_focus_options = get_option( 'ucpt_manage_settings' );
+		$ucpt_strategy_options = get_option( 'ucpt_manage_settings' );
 		?>
 		
-		<label style="color: #fff;" for="ucpt_focus">Primary Focus Area</label>
+		<label for="ucpt_focus">Primary Focus Area</label>
 			<select name="ucpt_focus" style="max-width:90%;">
 				<option value="<?php echo custom_field('ucpt_focus'); ?>"><?php echo custom_field('ucpt_focus'); ?></option>
 				<?php
-				if ($ucpt_focus_options['ucpt_manage_priority_1'] != "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_1'] != "") {
 				?>
-				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_1']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_1']; ?></option>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?></option>
 				<?php
 				}
-				if ($ucpt_focus_options['ucpt_manage_priority_2'] != "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_2'] != "") {
 				?>
-				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_2']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_2']; ?></option>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?></option>
 				<?php
 				}
-				if ($ucpt_focus_options['ucpt_manage_priority_3'] != "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_3'] != "") {
 				?>
-				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_3']; ?></option>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?></option>
 				<?php
 				}
-				if ($ucpt_focus_options['ucpt_manage_priority_4'] != "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_4'] != "") {
 				?>
-				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_4']; ?></option>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?></option>
 				<?php
 				}
-				if ($ucpt_focus_options['ucpt_manage_priority_5'] != "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_5'] != "") {
 				?>
-				<option value="<?php echo $ucpt_focus_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_focus_options['ucpt_manage_priority_5']; ?></option>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?></option>
 				<?php
 				}
-				if ($ucpt_focus_options['ucpt_manage_priority_1'] == "") {
+				if ($ucpt_strategy_options['ucpt_manage_priority_1'] == "") {
 				?>
 				<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
 				<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
@@ -104,6 +104,29 @@ $editor_settings = array( 'media_buttons' => false );
 				}
 				?>
 			</select>
+		
+		<?php
+				if ($ucpt_strategy_options['ucpt_manage_custom_categories_1'] != "") {	
+		?>
+		<label style="color: #fff;" for="ucpt_category">Data Category Tag</label>
+			<select name="ucpt_category" style="max-width:90%;">
+				<option value="<?php echo custom_field('ucpt_category'); ?>"><?php echo custom_field('ucpt_category'); ?></option>
+				<?php
+				$category = 1;
+				$max_categories = 15;
+				while ($category <= $max_categories) {
+					if ($ucpt_strategy_options['ucpt_manage_custom_categories_' . $category] != "") {
+				?>
+				<option value="<?php echo $ucpt_strategy_options['ucpt_manage_custom_categories_' . $category]; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_custom_categories_' . $category]; ?></option>
+				<?php
+					}
+				$category++;
+				}
+				?>
+			</select>
+		<?php
+			}
+		?>
 
 		<label for="ucpt_date_start"><b style="font-size: 110%;">Estimated Implementation Date</b></label>
 			<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field('ucpt_date_start'); ?>" />
@@ -166,6 +189,7 @@ function ucpt_strategy_fields_save( $group_id ) {
 		'ucpt_desc',
 		'ucpt_level',
 		'ucpt_focus',
+		'ucpt_category',
 		'ucpt_date_start',
 		'ucpt_date_end',
 		'ucpt_cis_ease',
@@ -225,7 +249,6 @@ function ucpt_strategy_page() {
 					$ucpt_group_name = bp_get_group_name();
 					$ucpt_perma = bp_get_group_permalink( $bp->groups->current_group );
 					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Health Improvement Strategy</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
-				if (custom_field('ucpt_goal') != "") {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Goal:</b> " . custom_field('ucpt_goal') . "</p>";
 					echo "</div>";
@@ -237,6 +260,9 @@ function ucpt_strategy_page() {
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Primary Focus Area:</b> " . custom_field('ucpt_focus') . "</p>";
+					echo "</div>";
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Data Category Tag:</b> " . custom_field('ucpt_category') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Estimated Implementation Date:</b> " . custom_field('ucpt_date_start') . "</p>";
@@ -256,7 +282,6 @@ function ucpt_strategy_page() {
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Research:</b> " . custom_field('ucpt_research') . "</p>";
 					echo "</div>";
-				}
 			} 
 		} // end of class
 		bp_register_group_extension( 'UCPT_Pages' );
