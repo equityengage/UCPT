@@ -1,8 +1,8 @@
 # Credits
 
-Charts powered by https://www.chartjs.org/
+## Charts powered by https://www.chartjs.org/
 
-Thanks to the following sources for inspiration and assistance in developing this project:
+## Thanks to the following sources for inspiration and assistance in developing this project:
 
 http://wpsettingsapi.jeroensormani.com/
 
