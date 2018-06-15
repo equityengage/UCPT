@@ -3,8 +3,8 @@
 Plugin Name: UCPT Manager Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting UCPT driver plug-ins with additional variables.
-Version: 8.01
-Requires at least: 3.3
+Version: 8.13
+Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
 Author: UCPT
@@ -223,6 +223,86 @@ function ucpt_manage_settings_init(  ) {
 		'ucpt_manage_pluginPage_section' 
 	);
 	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_1', 
+		__( 'Custom Embed Host URL #1 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_1_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_2', 
+		__( 'Custom Embed Host URL #2 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_2_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_3', 
+		__( 'Custom Embed Host URL #3 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_3_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+		add_settings_field( 
+		'ucpt_manage_custom_embed_4', 
+		__( 'Custom Embed Host URL #4 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_4_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_5', 
+		__( 'Custom Embed Host URL #5 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_5_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_6', 
+		__( 'Custom Embed Host URL #6 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_6_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+		add_settings_field( 
+		'ucpt_manage_custom_embed_7', 
+		__( 'Custom Embed Host URL #7 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_7_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_8', 
+		__( 'Custom Embed Host URL #8 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_8_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_custom_embed_9', 
+		__( 'Custom Embed Host URL #9 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_9_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+		add_settings_field( 
+		'ucpt_manage_custom_embed_10', 
+		__( 'Custom Embed Host URL #10 (i.e.; http://google.com/)', 'ucpt_manage' ), 
+		'ucpt_manage_custom_embed_10_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
 }
 
 
@@ -424,6 +504,96 @@ function ucpt_manage_custom_categories_15_render(  ) {
 	$options = get_option( 'ucpt_manage_settings' );
 	?>
 	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_categories_15]' value='<?php echo $options['ucpt_manage_custom_categories_15']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_1_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_1]' value='<?php echo $options['ucpt_manage_custom_embed_1']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_2_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_2]' value='<?php echo $options['ucpt_manage_custom_embed_2']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_3_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_3]' value='<?php echo $options['ucpt_manage_custom_embed_3']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_4_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_4]' value='<?php echo $options['ucpt_manage_custom_embed_4']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_5_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_5]' value='<?php echo $options['ucpt_manage_custom_embed_5']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_6_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_6]' value='<?php echo $options['ucpt_manage_custom_embed_6']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_7_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_7]' value='<?php echo $options['ucpt_manage_custom_embed_7']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_8_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_8]' value='<?php echo $options['ucpt_manage_custom_embed_8']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_9_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_9]' value='<?php echo $options['ucpt_manage_custom_embed_9']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_custom_embed_10_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_custom_embed_10]' value='<?php echo $options['ucpt_manage_custom_embed_10']; ?>'>
 	<?php
 
 }
