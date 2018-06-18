@@ -38,4 +38,4 @@ The anticipated release schedule will run from January 31, 2018 - July 1, 2018 w
 # CHANGELOG
 
 # Participation & Support
-This project is currently maintained by the <a href="https://garretthealth.org/">Garrett County Health Department</a>, and was supported for public, open source release by <a href="https://phnci.org/">PHNCI</a>, a division of <a href="http://www.phaboard.org/">PHAB</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation</a>. 
+This project is currently maintained by the <a href="https://garretthealth.org/">Garrett County Health Department</a>, and was supported for public, open source release by <a href="https://phnci.org/">PHNCI</a>, a division of <a href="http://www.phaboard.org/">PHAB</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation</a> to serve as templates for communities seeking to implement the Universal Community Planning Tool (UCPT) Framework for population health improvement in their communities. 
