@@ -13,7 +13,7 @@ This project is coordinated by the Garrett County Health Department, with suppor
 
 # v8.13 - UCPT Usability Release
 ## 6/18/2018 - v8.13 - UCPT Release
-Pending.
+The Universal Community Planning Tool has received numerous small upgrades, including the addition of in-screen buttons for Action Group Admins to edit data and strategy details, in addition to the simplification of group creation steps, and the edit panel.
 
 # v8.01 - UCPT Major Release
 ## 6/1/2018 - v8.01 - UCPT Release
