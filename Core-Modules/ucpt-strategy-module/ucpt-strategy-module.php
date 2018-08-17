@@ -3,7 +3,7 @@
 Plugin Name: UCPT Strategy Card
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
-Version: 8.13
+Version: 9.01b
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
@@ -85,6 +85,11 @@ function ucpt_strategy_page() {
 							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?></option>
 							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?></option>
 							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?></option>
+							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_6']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_6']; ?></option>
+							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_7']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_7']; ?></option>
+							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_8']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_8']; ?></option>
+							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_9']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_9']; ?></option>
+							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_10']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_10']; ?></option>
 							<?php
 							}
 							else {
@@ -116,6 +121,7 @@ function ucpt_strategy_page() {
 							$category++;
 							}
 							?>
+							<option value="">Reset the Data Category Tag to blank.</option>
 						</select>
 					<?php
 						}
@@ -185,6 +191,9 @@ function ucpt_strategy_page() {
 					}
 
 				}
+				$editor_record = bp_core_get_user_displayname( bp_loggedin_user_id() );
+				$activity_update = "Strategy card settings were updated by " . $editor_record . ".";
+				groups_post_update(array('content' => $activity_update, 'group_id' => $group_id));
 			}  
 			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
