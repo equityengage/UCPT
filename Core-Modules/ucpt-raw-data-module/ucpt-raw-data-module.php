@@ -3,7 +3,7 @@
 Plugin Name: UCPT Raw Data Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of raw data reporting to BuddyPress groups.
-Version: 9.02b
+Version: 9.01b
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
@@ -499,7 +499,6 @@ function ucpt_data_page() {
 							<tr>
 								<th style="background-color:#fff;">Measurements</th>
 								<th>Target Goal</th>
-								<th>FY 18 Benchmark</th>
 								<th>Status</th>
 								<th>Desired Trend</th>
 								<th>Contributor</th>
@@ -573,9 +572,6 @@ function ucpt_data_page() {
 							</td>
 							<td>
 								<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>
-							</td>
-							<td>
-								<?php $fy18 = custom_field_data('ucpt_m_' . $measure_count . '_y1_m7') + custom_field_data('ucpt_m_' . $measure_count . '_y1_m8') + custom_field_data('ucpt_m_' . $measure_count . '_y1_m9') + custom_field_data('ucpt_m_' . $measure_count . '_y1_m10') + custom_field_data('ucpt_m_' . $measure_count . '_y1_m11') + custom_field_data('ucpt_m_' . $measure_count . '_y1_m12') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m1') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m2') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m3') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m4') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m5') + custom_field_data('ucpt_m_' . $measure_count . '_y2_m6'); echo $fy18; ?>
 							</td>
 							<td>
 								<?php if (custom_field_data('ucpt_measure_' . $measure_count . '_status') == "Archived") { ?>
