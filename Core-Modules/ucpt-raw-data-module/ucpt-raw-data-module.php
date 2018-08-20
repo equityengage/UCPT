@@ -3,7 +3,7 @@
 Plugin Name: UCPT Raw Data Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of raw data reporting to BuddyPress groups.
-Version: 9.01b
+Version: 9.02b
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
@@ -453,6 +453,7 @@ function ucpt_data_page() {
 				?>
 				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+				<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
 				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
