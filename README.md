@@ -1,5 +1,3 @@
-![Universal Community Planning Tool Screen](https://equityengage.com/wp-content/uploads/2018/06/Screens.jpg)
-
 # UCPT 10.1 Final Initial Release
 Universal Community Planning Tool
 
@@ -10,6 +8,8 @@ The WordPress plug-ins contained within this repository are working, deployable 
 The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-by-step implementation instructions can be found on EquityEngage.com.
 
 This project is coordinated by the Garrett County Health Department, with support from PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
+
+![Universal Community Planning Tool Screen](https://equityengage.com/wp-content/uploads/2018/06/Screens.jpg)
 
 # CHANGELOG
 
