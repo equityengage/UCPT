@@ -1,3 +1,5 @@
+![Universal Community Planning Tool Screen](https://equityengage.com/wp-content/uploads/2018/06/Screens.jpg)
+
 # UCPT 10.1 Final Initial Release
 Universal Community Planning Tool
 
