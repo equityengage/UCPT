@@ -1,4 +1,4 @@
-# UCPT 9.01b Beta Development
+# UCPT 10.1 Final Initial Release
 Universal Community Planning Tool
 
 The Universal Community Planning Tool (UCPT) is a population health planning framework that guides communities in implementing a digital collaborative to track their community's planning processes.
@@ -10,6 +10,14 @@ The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-
 This project is coordinated by the Garrett County Health Department, with support from PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
+
+# v10.1 - Final Initial Release
+## 10/5/2018 - v10.1 - UCPT Release
+The improvements tested by the PHNCI Learning Community for the Initial PHNCI Replication Round that were promising have been adopted into this final release under the scope of the original and supplementary programs. This release includes improved libraries for handling data, styling enhancements, and many, many small improvements discovered during the testing period.
+
+# v9.x Series - UCPT Learning Community Beta Releases
+## Beta Releases Tested During the Initial PHNCI Replication Round
+The PHNCI Learning Community developed for the Initial PHNCI Replication Round tested numerous improvements that were either incorporated or dropped in the 10.x series final initial release.
 
 # v8.13 - UCPT Usability Release
 ## 6/18/2018 - v8.13 - UCPT Release
