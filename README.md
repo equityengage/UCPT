@@ -9,7 +9,7 @@ The UCPT premade plug-ins require a WordPress/BuddyPress installation, and step-
 
 This project is coordinated by the Garrett County Health Department, with support from PHNCI, a division of PHAB, and the Robert Wood Johnson Foundation as a emerging innovation in Public Health.
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/equityengage/UCPT/badges/build.png?b=master)](https://scrutinizer-ci.com/g/equityengage/UCPT/build-status/master)
+# CHANGELOG
 
 # v10.1 - Final Initial Release
 ## 10/5/2018 - v10.1 - UCPT Release
@@ -38,12 +38,19 @@ The release currently contained within the Core-Modules folder is an initial rel
 # Release Schedule
 The anticipated release schedule will run from January 31, 2018 - July 1, 2018 with frequent updates that include bugfixes, improved styling to maximize WordPress theme compatability, enhanced documentation and customization, use in multi-networks, and several other enhancements.
 
-# Projects
+# Pilot Project
 <ul>
 <li><a href="https://mygarrettcounty.com">MyGarrettCounty.com</a> - The Garrett County, Maryland pilot of the UCPT framework and plug-ins</li>
 </ul>
 
-# CHANGELOG
+# Featured Installations in Action
+<ul>
+<li><a href="http://alleganyspeaks.com/">AlleganySpeaks.com</a> - Allegany County, Maryland</li>
+<li><a href="http://blueprintclackamas.com/">BlueprintClackamas.com</a> - Clackamas County, Oregon</li>
+<li><a href="http://flatheadforward.com/">FlatheadForward.com</a> - Flathead City & County, Montana</li>
+<li><a href="https://livingwellmedinacounty.com/">LivingWellMedinaCounty.com</a> - Medina County, Ohio</li>
+<li><a href="https://ourhealthydc.org/">OurHealthyDC.org</a> - The District of Columbia</li>
+</ul>
 
 # Participation & Support
 This project is currently maintained by the <a href="https://garretthealth.org/">Garrett County Health Department</a>, and was supported for public, open source release by <a href="https://phnci.org/">PHNCI</a>, a division of <a href="http://www.phaboard.org/">PHAB</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation</a> to serve as templates for communities seeking to implement the Universal Community Planning Tool (UCPT) Framework for population health improvement in their communities. 
