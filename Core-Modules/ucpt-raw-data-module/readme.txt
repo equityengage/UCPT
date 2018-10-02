@@ -4,7 +4,7 @@ Tags: buddypress, community, planning, health, public health, population health,
 Requires at least: 4.9
 Tested up to: 4.9.6
 Requires PHP: 5.6
-Stable tag: 8.13
+Stable tag: 10.1
 License: GNU GPL V3
 License URI: https://github.com/equityengage/UCPT/blob/master/LICENSE
 
