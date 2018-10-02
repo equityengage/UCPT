@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: UCPT Strategy Card
+Plugin Name: UCPT Raw Data Module
 Plugin URI: https://equityengage.com
-Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
+Description: This plug-in is a UCPT module supporting the addition of raw data reporting to BuddyPress groups.
 Version: 10.1
 Requires at least: 4.9
 Tested up to: 4.9.6
@@ -13,8 +13,8 @@ Author URI: https://equityengage.com
 
 // UCPT Active?
 
-register_activation_hook( __FILE__, 'ucpt_modules_strategy' );
-function ucpt_modules_strategy(){
+register_activation_hook( __FILE__, 'ucpt_modules_data' );
+function ucpt_modules_data(){
 
     // Require parent plugin
     if ( ! is_plugin_active( 'ucpt-manager-module/ucpt-manager-module.php' ) && current_user_can( 'activate_plugins' ) ) {
@@ -23,26 +23,26 @@ function ucpt_modules_strategy(){
     }
 }
 
-function custom_field_strategy_card($meta_key='') {
+function custom_field_data($meta_key='') {
 
 //get current group id and load meta_key value if passed. If not pass it blank
 return groups_get_groupmeta( bp_get_group_id(), $meta_key) ;
 }
 
-function ucpt_strategy_page() {
+function ucpt_data_page() {
 	if ( class_exists( 'BP_Group_Extension' ) ) :
-		class UCPT_Pages extends BP_Group_Extension {
+		class UCPT_Data_Pages extends BP_Group_Extension {
 			var $enable_create_step = true;
 			var $enable_nav_item = true;
 			var $enable_edit_item = true;
 			function __construct() {
 				$args = array(
-					'slug' => 'strategy',
-					'name' => 'Strategy',
-					'nav_item_position' => 40,
+					'slug' => 'raw-data',
+					'name' => 'Raw Data +',
+					'nav_item_position' => 42,
 					'screens' => array(
 						'create' => array(
-							'position' => 10,
+							'position' => 12,
 						),
 					)
 				);
@@ -53,156 +53,406 @@ function ucpt_strategy_page() {
 			echo "<p>These settings are configured via the front-end of your planning tool.</p>";
 			}
 			function admin_screen_save( $group_id = null ) {
-			}			
+			}
 			function settings_screen( $group_id = null ) {
-			$editor_settings = array( 'media_buttons' => false );
-			?>
-			<div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
-				<b style="font-size: 150%;">Strategy Planning Worksheet</b>
-				<p>An innovative feature, unique to the planning tool, is the ability to dynamically track strategy progress over time. This workspace is designed for multiple stakeholders to collaborate on one specific strategy.  Please explain the specific strategy you will be measuring in the space below. <b>Expert Tip:</b> If the strategy can not be measured please consider alternative actions that can be assessed.</p>
-
-					<label for="ucpt_goal"><b style="font-size: 110%;">Goal</b></label>
-						<input id="ucpt_goal" type="text" name="ucpt_goal" value="<?php echo custom_field_strategy_card('ucpt_goal'); ?>" />
-
-					<label for="ucpt_desc"><b style="font-size: 110%;">Strategy Description</b></label>
-						<?php wp_editor( custom_field_strategy_card('ucpt_desc'), 'ucpt_desc', $editor_settings ); ?> 
-
-					<label for="ucpt_level"><b style="font-size: 110%;">Level of Change</b></label>
-						<select name="ucpt_level">
-							<option value="<?php echo custom_field_strategy_card('ucpt_level'); ?>"><?php echo custom_field_strategy_card('ucpt_level'); ?></option>
-							<option value="Policy">Policy</option>
-							<option value="Systems">Systems</option>
-							<option value="Programs">Program</option>
-						</select>
-
-					<?php
-					$ucpt_strategy_options = get_option( 'ucpt_manage_settings' );
-					?>
-					
-					<label for="ucpt_focus">Primary Focus Area</label>
-						<select name="ucpt_focus" style="max-width:90%;">
-							<option value="<?php echo custom_field_strategy_card('ucpt_focus'); ?>"><?php echo custom_field_strategy_card('ucpt_focus'); ?></option>
-							<?php
-							if ($ucpt_strategy_options['ucpt_manage_priority_1'] != "") {
-							?>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_1']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_2']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_3']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_4']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_5']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_6']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_6']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_7']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_7']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_8']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_8']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_9']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_9']; ?></option>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_priority_10']; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_priority_10']; ?></option>
-							<?php
-							}
-							else {
-							?>
-							<option value="Behavioral Health: including Substance Abuse and Mental Health">Behavioral Health: including Substance Abuse and Mental Health</option>
-							<option value="Maternal, Child, and Adolescent Health">Maternal, Child, and Adolescent Health</option>
-							<option value="Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use">Chronic Diseases and their common risk factors: lack of physical activity, poor nutrition, and tobacco use</option>
-							<option value="Access to Care and Linkages to Community Resources">Access to Care and Linkages to Community Resources</option>
-							<?php
-							}
-							?>
-						</select>
-					
-					<?php
-							if ($ucpt_strategy_options['ucpt_manage_custom_categories_1'] != "") {	
-					?>
-					<label style="color: #fff;" for="ucpt_category">Data Category Tag</label>
-						<select name="ucpt_category" style="max-width:90%;">
-							<option value="<?php echo custom_field_strategy_card('ucpt_category'); ?>"><?php echo custom_field_strategy_card('ucpt_category'); ?></option>
-							<?php
-							$category = 1;
-							$max_categories = 15;
-							while ($category <= $max_categories) {
-								if ($ucpt_strategy_options['ucpt_manage_custom_categories_' . $category] != "") {
-							?>
-							<option value="<?php echo $ucpt_strategy_options['ucpt_manage_custom_categories_' . $category]; ?>"><?php echo $ucpt_strategy_options['ucpt_manage_custom_categories_' . $category]; ?></option>
-							<?php
-								}
-							$category++;
-							}
-							?>
-							<option value="">Reset the Data Category Tag to blank.</option>
-						</select>
-					<?php
+				// don't remove this function
+				$editor_settings = array( 'media_buttons' => false );
+				?>
+				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+				<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+				<script>
+				$(document).ready( function () {
+					$('#myDataTableEdit').DataTable(
+						{
+							scrollX: true,
+							order: [],
+							scrollY: '500px',
+							fixedColumns: true,
+							scrollCollapse: true,
+							paging: false,
+							bFilter: false,
+							ordering: false,
 						}
+					);
+				} );
+				</script>
+					<div style="background-color:#009150; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
+					<span style="color: #fff !important;"><b style="font-size: 150%;">Data Planning Worksheet</b>
+					<p>The purpose of this planning tool is to collect community data for comparison, tracking, and overall community health improvement. Data plays a critical role in ensuring that our strategies are effective, and can be correlated to specific actions within the community. Data must be numerical to allow for cross comparison of variables.</p></span>
+					<br />				
+					<div style="background-color:#fff; padding:10px;">
+					<table id="myDataTableEdit" border="1" bordercolor="#ededed" width="100%" class="table table-striped">
+						<thead>
+							<tr>
+								<th>Measurements</th>
+								<th>Target Goal</th>
+								<th>Status</th>
+								<th>Desired Trend</th>
+								<th>Contributor</th>
+								<?php
+								$ucpt_data_time_reporting = get_option( 'ucpt_manage_settings' );
+								$ucpt_start_date_raw = $ucpt_data_time_reporting['ucpt_manage_start_date'];
+								$ucpt_start_date = date('Y', strtotime($ucpt_start_date_raw));
+								?>
+									<th>January <?php echo $ucpt_start_date; ?></th>
+									<th>February <?php echo $ucpt_start_date; ?></th>
+									<th>March <?php echo $ucpt_start_date; ?></th>
+									<th>April <?php echo $ucpt_start_date; ?></th>
+									<th>May <?php echo $ucpt_start_date; ?></th>
+									<th>June <?php echo $ucpt_start_date; ?></th>
+									<th>July <?php echo $ucpt_start_date; ?></th>
+									<th>August <?php echo $ucpt_start_date; ?></th>
+									<th>September <?php echo $ucpt_start_date; ?></th>
+									<th>October <?php echo $ucpt_start_date; ?></th>
+									<th>November <?php echo $ucpt_start_date; ?></th>
+									<th>December <?php echo $ucpt_start_date; ?></th>
+									<th>January <?php echo $ucpt_start_date + 1; ?></th>
+									<th>February <?php echo $ucpt_start_date + 1; ?></th>
+									<th>March <?php echo $ucpt_start_date + 1; ?></th>
+									<th>April <?php echo $ucpt_start_date + 1; ?></th>
+									<th>May <?php echo $ucpt_start_date + 1; ?></th>
+									<th>June <?php echo $ucpt_start_date + 1; ?></th>
+									<th>July <?php echo $ucpt_start_date + 1; ?></th>
+									<th>August <?php echo $ucpt_start_date + 1; ?></th>
+									<th>September <?php echo $ucpt_start_date + 1; ?></th>
+									<th>October <?php echo $ucpt_start_date + 1; ?></th>
+									<th>November <?php echo $ucpt_start_date + 1; ?></th>
+									<th>December <?php echo $ucpt_start_date + 1; ?></th>
+									<th>January <?php echo $ucpt_start_date + 2; ?></th>
+									<th>February <?php echo $ucpt_start_date + 2; ?></th>
+									<th>March <?php echo $ucpt_start_date + 2; ?></th>
+									<th>April <?php echo $ucpt_start_date + 2; ?></th>
+									<th>May <?php echo $ucpt_start_date + 2; ?></th>
+									<th>June <?php echo $ucpt_start_date + 2; ?></th>
+									<th>July <?php echo $ucpt_start_date + 2; ?></th>
+									<th>August <?php echo $ucpt_start_date + 2; ?></th>
+									<th>September <?php echo $ucpt_start_date + 2; ?></th>
+									<th>October <?php echo $ucpt_start_date + 2; ?></th>
+									<th>November <?php echo $ucpt_start_date + 2; ?></th>
+									<th>December <?php echo $ucpt_start_date + 2; ?></th>
+									<th>January <?php echo $ucpt_start_date + 3; ?></th>
+									<th>February <?php echo $ucpt_start_date + 3; ?></th>
+									<th>March <?php echo $ucpt_start_date + 3; ?></th>
+									<th>April <?php echo $ucpt_start_date + 3; ?></th>
+									<th>May <?php echo $ucpt_start_date + 3; ?></th>
+									<th>June <?php echo $ucpt_start_date + 3; ?></th>
+									<th>July <?php echo $ucpt_start_date + 3; ?></th>
+									<th>August <?php echo $ucpt_start_date + 3; ?></th>
+									<th>September <?php echo $ucpt_start_date + 3; ?></th>
+									<th>October <?php echo $ucpt_start_date + 3; ?></th>
+									<th>November <?php echo $ucpt_start_date + 3; ?></th>
+									<th>December <?php echo $ucpt_start_date + 3; ?></th>
+							</tr>
+						</thead>
+						<tbody>
+								<?php
+									$ucpt_measures_options = get_option( 'ucpt_manage_settings' );
+									$max_measures = $ucpt_measures_options['ucpt_manage_measure_number'];
+									$measure_count = 1;
+									while ($measure_count <= $max_measures) {
+								?>
+							<tr>
+								<td>
+									<input id="ucpt_measure_<?php echo $measure_count; ?>" type="text" name="ucpt_measure_<?php echo $measure_count; ?>" placeholder="Measure <?php echo $measure_count; ?>" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_measure_<?php echo $measure_count; ?>_goal" type="number" step="0.01" name="ucpt_measure_<?php echo $measure_count; ?>_goal" placeholder="Target Goal" value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>" />
+								</td>
+								<td>
+								<select name="ucpt_measure_<?php echo $measure_count; ?>_status">
+									<option value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_status'); ?>"><?php echo custom_field_data('ucpt_measure_' . $measure_count . '_status'); ?></option>
+									<option value="Active">Active</option>
+									<option value="Archived">Archived</option>
+								</select>
+								</td>
+								<td>
+								<select name="ucpt_measure_<?php echo $measure_count; ?>_trend">
+									<option value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_trend'); ?>"><?php echo custom_field_data('ucpt_measure_' . $measure_count . '_trend'); ?></option>
+									<option value="Increase">Increase</option>
+									<option value="Decrease">Decrease</option>
+								</select>
+								</td>
+								<td>
+									<input id="ucpt_measure_<?php echo $measure_count; ?>_contributor" type="text" name="ucpt_measure_<?php echo $measure_count; ?>_contributor" placeholder="Person, agency, etc..." value="<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_contributor'); ?>" />
+								</td>				
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m1" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m1" placeholder="Baseline" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m1'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m2" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m2'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m3" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m3'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m4" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m4'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m5" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m5'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m6" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m6'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m7" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m7'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m8" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m8'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m9" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m9'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m10" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m10'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m11" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m11'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y1_m12" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y1_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m12'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m1" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m1'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m2" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m2'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m3" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m3'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m4" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m4'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m5" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m5'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m6" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m6'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m7" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m7'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m8" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m8'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m9" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m9'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m10" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m10'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m11" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m11'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y2_m12" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y2_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m12'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m1" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m1'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m2" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m2'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m3" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m3'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m4" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m4'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m5" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m5'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m6" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m6'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m7" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m7'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m8" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m8'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m9" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m9'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m10" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m10'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m11" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m11'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y3_m12" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y3_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m12'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m1" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m1" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m1'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m2" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m2" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m2'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m3" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m3" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m3'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m4" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m4" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m4'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m5" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m5" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m5'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m6" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m6" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m6'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m7" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m7" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m7'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m8" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m8" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m8'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m9" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m9" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m9'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m10" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m10" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m10'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m11" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m11" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m11'); ?>" />
+								</td>
+								<td>
+									<input id="ucpt_m_<?php echo $measure_count; ?>_y4_m12" type="number" step="0.01" name="ucpt_m_<?php echo $measure_count; ?>_y4_m12" value="<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m12'); ?>" />
+								</td>
+							</tr>
+							<?php 
+								$measure_count++;
+								}
+							?>
+						</tbody>
+						</table>
+						</div>
+					<br />
+					<div style="background-color:#fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
+					<p>
+					<h3>Data Narrative</h3>
+					</p>
+					<p>
+						<?php wp_editor( custom_field_data('ucpt_data_narrative'), 'ucpt_data_narrative', $editor_settings ); ?> 
+					</p>
+					<?php 
+					$editor_record = bp_core_get_user_displayname( bp_loggedin_user_id() );
 					?>
-
-					<label for="ucpt_date_start"><b style="font-size: 110%;">Estimated Implementation Date</b></label>
-						<input id="ucpt_date_start" type="date" name="ucpt_date_start" value="<?php echo custom_field_strategy_card('ucpt_date_start'); ?>" />
-
-					<label for="ucpt_date_end"><b style="font-size: 110%;">Estimated Completion Date</b></label>
-						<input id="ucpt_date_end" type="date" name="ucpt_date_end" value="<?php echo custom_field_strategy_card('ucpt_date_end'); ?>" />
-
-					<label for="ucpt_cis_ease"><b style="font-size: 110%;">Estimated Ease of Implementation</b></label>
-						<select name="ucpt_cis_ease">
-							<option value="<?php echo custom_field_strategy_card('ucpt_cis_ease'); ?>"><?php echo custom_field_strategy_card('ucpt_cis_ease'); ?></option>
-							<option value="Very Easy">Very Easy</option>
-							<option value="Easy">Easy</option>
-							<option value="Moderate">Moderate</option>
-							<option value="Hard">Hard</option>
-							<option value="Very Hard">Very Hard</option>
-						</select>
-
-					<label for="ucpt_cis_cost"><b style="font-size: 110%;">Estimated Cost of Implementation</b></label>
-						<select name="ucpt_cis_cost">
-							<option value="<?php echo custom_field_strategy_card('ucpt_cis_cost'); ?>"><?php echo custom_field_strategy_card('ucpt_cis_cost'); ?></option>
-							<option value="Very Low">Very Low</option>
-							<option value="Low">Low</option>
-							<option value="Moderate">Moderate</option>
-							<option value="High">High</option>
-							<option value="Very High">Very High</option>
-						</select>
-
-					<label for="ucpt_cis_benefit"><b style="font-size: 110%;">Estimated Potential Community Benefit</b></label>
-						<select name="ucpt_cis_benefit">
-							<option value="<?php echo custom_field_strategy_card('ucpt_cis_benefit'); ?>"><?php echo custom_field_strategy_card('ucpt_cis_benefit'); ?></option>
-							<option value="Very High">Very High</option>
-							<option value="High">High</option>
-							<option value="Moderate">Moderate</option>
-							<option value="Low">Low</option>
-							<option value="Very Low">Very Low</option>
-						</select>
-
-					<label for="ucpt_research"><b style="font-size: 110%;">Research</b></label>
-						<?php wp_editor( custom_field_strategy_card('ucpt_research'), 'ucpt_research', $editor_settings ); ?> 
-				<br />
-			</div>
-			<?php
-			}    
+					<p>
+					<h3>Last Modification</h3>
+					</p>
+					<p>
+						<input id="ucpt_data_edit" type="text" name="ucpt_data_edit" readonly="readonly" value="<?php echo $editor_record; ?> edited this group on <?php echo date("F d, Y"); ?>." />
+						<input id="ucpt_data_edit_log" type="hidden" name="ucpt_data_edit_log" readonly="readonly" value="<?php echo custom_field_data('ucpt_data_edit_log'); ?>" />
+					</p>
+					</div>
+					<br />
+				</div>
+				<?php
+			}  
 			function settings_screen_save( $group_id = NULL ) {
-				$plain_fields = array(
-					'ucpt_goal',
-					'ucpt_desc',
-					'ucpt_level',
-					'ucpt_focus',
-					'ucpt_category',
-					'ucpt_date_start',
-					'ucpt_date_end',
-					'ucpt_cis_ease',
-					'ucpt_cis_cost',
-					'ucpt_cis_benefit',
-					'ucpt_research'
-				);
-				foreach( $plain_fields as $field ) {
-					$key = $field;
-					if ( isset( $_POST[$key] ) ) {
-						$value = strip_tags($_POST[$key]);
-						groups_update_groupmeta( $group_id, $field, $value );
-					}
+				$ucpt_measures_options = get_option( 'ucpt_manage_settings' );
+				$max_measures = $ucpt_measures_options['ucpt_manage_measure_number'];
+				$measure_count = 1;
+				while ($measure_count <= $max_measures) {
+					$plain_fields = array(
+						'ucpt_measure_' . $measure_count,
+						'ucpt_measure_' . $measure_count . '_goal',
+						'ucpt_measure_' . $measure_count . '_status',
+						'ucpt_measure_' . $measure_count . '_trend',
+						'ucpt_measure_' . $measure_count . '_contributor',
+						'ucpt_m_' . $measure_count . '_y1_m1',
+						'ucpt_m_' . $measure_count . '_y1_m2',
+						'ucpt_m_' . $measure_count . '_y1_m3',
+						'ucpt_m_' . $measure_count . '_y1_m4',
+						'ucpt_m_' . $measure_count . '_y1_m5',
+						'ucpt_m_' . $measure_count . '_y1_m6',
+						'ucpt_m_' . $measure_count . '_y1_m7',
+						'ucpt_m_' . $measure_count . '_y1_m8',
+						'ucpt_m_' . $measure_count . '_y1_m9',
+						'ucpt_m_' . $measure_count . '_y1_m10',
+						'ucpt_m_' . $measure_count . '_y1_m11',
+						'ucpt_m_' . $measure_count . '_y1_m12',
+						'ucpt_m_' . $measure_count . '_y2_m1',
+						'ucpt_m_' . $measure_count . '_y2_m2',
+						'ucpt_m_' . $measure_count . '_y2_m3',
+						'ucpt_m_' . $measure_count . '_y2_m4',
+						'ucpt_m_' . $measure_count . '_y2_m5',
+						'ucpt_m_' . $measure_count . '_y2_m6',
+						'ucpt_m_' . $measure_count . '_y2_m7',
+						'ucpt_m_' . $measure_count . '_y2_m8',
+						'ucpt_m_' . $measure_count . '_y2_m9',
+						'ucpt_m_' . $measure_count . '_y2_m10',
+						'ucpt_m_' . $measure_count . '_y2_m11',
+						'ucpt_m_' . $measure_count . '_y2_m12',
+						'ucpt_m_' . $measure_count . '_y3_m1',
+						'ucpt_m_' . $measure_count . '_y3_m2',
+						'ucpt_m_' . $measure_count . '_y3_m3',
+						'ucpt_m_' . $measure_count . '_y3_m4',
+						'ucpt_m_' . $measure_count . '_y3_m5',
+						'ucpt_m_' . $measure_count . '_y3_m6',
+						'ucpt_m_' . $measure_count . '_y3_m7',
+						'ucpt_m_' . $measure_count . '_y3_m8',
+						'ucpt_m_' . $measure_count . '_y3_m9',
+						'ucpt_m_' . $measure_count . '_y3_m10',
+						'ucpt_m_' . $measure_count . '_y3_m11',
+						'ucpt_m_' . $measure_count . '_y3_m12',
+						'ucpt_m_' . $measure_count . '_y4_m1',
+						'ucpt_m_' . $measure_count . '_y4_m2',
+						'ucpt_m_' . $measure_count . '_y4_m3',
+						'ucpt_m_' . $measure_count . '_y4_m4',
+						'ucpt_m_' . $measure_count . '_y4_m5',
+						'ucpt_m_' . $measure_count . '_y4_m6',
+						'ucpt_m_' . $measure_count . '_y4_m7',
+						'ucpt_m_' . $measure_count . '_y4_m8',
+						'ucpt_m_' . $measure_count . '_y4_m9',
+						'ucpt_m_' . $measure_count . '_y4_m10',
+						'ucpt_m_' . $measure_count . '_y4_m11',
+						'ucpt_m_' . $measure_count . '_y4_m12'
+					);
+					
+					foreach( $plain_fields as $field ) {
+						$key = $field;
+						if ( isset( $_POST[$key] ) ) {
+							$value = strip_tags($_POST[$key]);
+							groups_update_groupmeta( $group_id, $field, $value );
+						}
 
+					}
+				$measure_count++;
+				}
+				
+				if ( isset( $_POST["ucpt_data_narrative"] ) ) {
+						$value = $_POST["ucpt_data_narrative"];
+						groups_update_groupmeta( $group_id, "ucpt_data_narrative", $value );
+				}
+				
+				if ( isset( $_POST["ucpt_data_edit"] ) ) {
+						$temp = $_POST["ucpt_data_edit"];
+						$current = $_POST["ucpt_data_edit_log"];
+						$value = $temp . "<br />" . $current;
+						groups_update_groupmeta( $group_id, "ucpt_data_edit_log", $value );
 				}
 				$editor_record = bp_core_get_user_displayname( bp_loggedin_user_id() );
-				$activity_update = "Strategy card settings were updated by " . $editor_record . ".";
+				$activity_update = "Raw data + was updated by " . $editor_record . ".";
 				groups_post_update(array('content' => $activity_update, 'group_id' => $group_id));
 			}  
 			function display( $group_id = null ) {
 				/* Use this function to display the actual content of your group extension when the nav item is selected */
 				global $bp;
+				if (custom_field_data('ucpt_measure_1') == "") {
+					echo "This group has not yet set measures.";
+				}
+				if (custom_field_data('ucpt_measure_1') != "") {
+				
 				$group_cover_image_url = bp_attachments_get_attachment('url', array(
 					  'object_dir' => 'groups',
 					  'item_id' => bp_get_group_id(),
@@ -211,65 +461,599 @@ function ucpt_strategy_page() {
 					$ucpt_group_name = bp_get_group_name();
 					$ucpt_perma = bp_get_group_permalink( $bp->groups->current_group );
 					if (groups_is_user_admin( get_current_user_id(), bp_get_group_id())) {
-					?>
-					<p><form method="get" action="<?php echo $ucpt_perma; ?>admin/strategy"><button type="submit" align="right">Edit Strategy Card</button></form></p>
-					<?php
+				?>
+					<p><form method="get" action="<?php echo $ucpt_perma; ?>admin/raw-data"><button type="submit" align="right">Edit Data</button></form></p>
+				<?php
 					}
-					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Health Improvement Strategy</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Goal:</b> " . custom_field_strategy_card('ucpt_goal') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Strategy Description:</b> " . custom_field_strategy_card('ucpt_desc') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Level of Change:</b> " . custom_field_strategy_card('ucpt_level') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Primary Focus Area:</b> " . custom_field_strategy_card('ucpt_focus') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Data Category Tag:</b> " . custom_field_strategy_card('ucpt_category') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Implementation Date:</b> " . custom_field_strategy_card('ucpt_date_start') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Completion Date:</b> " . custom_field_strategy_card('ucpt_date_end') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Ease of Implementation:</b> " . custom_field_strategy_card('ucpt_cis_ease') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Estimated Cost of Implementation:</b> " . custom_field_strategy_card('ucpt_cis_cost') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Potential Community Benefit:</b> " . custom_field_strategy_card('ucpt_cis_benefit') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Research:</b> " . custom_field_strategy_card('ucpt_research') . "</p>";
-					echo "</div>";
-					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Planning Tool Info:</b></p>";
-					?>
-					<p>
-						<a href="https://equityengage.com">Open source health equity platform</a> powered by the <a href="https://equityengage.com/universal-community-planning-tool/">Universal Community Planning Tool</a> (UCPT), <a href="https://buddypress.org/">BuddyPress</a>, and <a href="https://wordpress.org/">WordPress</a>. 
-						<br />
-						Built with ❤️ in <a href="https://garretthealth.org">Garrett County, Maryland</a>. 
-						<br />
-						Expanded development and open source release of this plug-in was sponsored by the <a href="https://phnci.org">Public Health National Center for Innovations</a> (PHNCI), a division of the <a href="http://www.phaboard.org/">Public Health Accreditation Board (PHAB)</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation (RWJF)</a>.
-						<br />
-						Related: assessments, informatics, population health, hyper local data, measurement, open data, open source, community engagement, health equity, community solutions, data dashboard
-					</p>
+					echo "<div style='background: linear-gradient(rgba(10, 118, 211, 0.85), rgba(8, 94, 168, 0.85)), url(" . $ucpt_cover . "); background-size:100%; width=100%; min-height: 150px; padding: 30px;'><div style='font-size: 32px; color: #fff;'>Raw Data +</div><br /><div style='font-size: 18px; color: #efefef;'>" . $ucpt_group_name . "</div><br/><div style='font-size: 10px; color: #efefef;'>" . $ucpt_perma ."</div></div>";
+				?>
+				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+				<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+				<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+				<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+				<script>
+				$(document).ready( function () {
+					$('#myDataTable').DataTable(
+						{
+							scrollX: true,
+							order: [],
+							scrollY: '500px',
+							fixedColumns: true,
+							scrollCollapse: true,
+							paging: false,
+							dom: 'Bfrtip',
+							buttons: [
+								'selectAll', 'selectNone', 'copy', 'csv', 'excel', {
+									text: 'JSON',
+									action: function ( e, dt, button, config ) {
+										var data = dt.buttons.exportData();
+					 
+										$.fn.dataTable.fileSave(
+											new Blob( [ JSON.stringify( data ) ] ),
+											'Export.json'
+										);
+									}
+								}
+							],
+							select: {
+            style: 'multi'
+        }
+						}
+					);
+				} );
+				</script>
+				<div style="background-color:#009150; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
+				<div style="background-color:#fff; padding:10px;">
+					<table id="myDataTable" border="1" bordercolor="#ededed" width="100%" class="table table-striped">
+						<thead>
+							<tr>
+								<th style="background-color:#fff;">Measurements</th>
+								<th>Target Goal</th>
+								<th>Status</th>
+								<th>Desired Trend</th>
+								<th>Contributor</th>
+								<?php
+								$ucpt_data_time_reporting = get_option( 'ucpt_manage_settings' );
+								$ucpt_start_date_raw = $ucpt_data_time_reporting['ucpt_manage_start_date'];
+
+								$ucpt_start_date = date('Y', strtotime($ucpt_start_date_raw));
+								?>
+									<th>January <?php echo $ucpt_start_date; ?></th>
+									<th>February <?php echo $ucpt_start_date; ?></th>
+									<th>March <?php echo $ucpt_start_date; ?></th>
+									<th>April <?php echo $ucpt_start_date; ?></th>
+									<th>May <?php echo $ucpt_start_date; ?></th>
+									<th>June <?php echo $ucpt_start_date; ?></th>
+									<th>July <?php echo $ucpt_start_date; ?></th>
+									<th>August <?php echo $ucpt_start_date; ?></th>
+									<th>September <?php echo $ucpt_start_date; ?></th>
+									<th>October <?php echo $ucpt_start_date; ?></th>
+									<th>November <?php echo $ucpt_start_date; ?></th>
+									<th>December <?php echo $ucpt_start_date; ?></th>
+									<th>January <?php echo $ucpt_start_date + 1; ?></th>
+									<th>February <?php echo $ucpt_start_date + 1; ?></th>
+									<th>March <?php echo $ucpt_start_date + 1; ?></th>
+									<th>April <?php echo $ucpt_start_date + 1; ?></th>
+									<th>May <?php echo $ucpt_start_date + 1; ?></th>
+									<th>June <?php echo $ucpt_start_date + 1; ?></th>
+									<th>July <?php echo $ucpt_start_date + 1; ?></th>
+									<th>August <?php echo $ucpt_start_date + 1; ?></th>
+									<th>September <?php echo $ucpt_start_date + 1; ?></th>
+									<th>October <?php echo $ucpt_start_date + 1; ?></th>
+									<th>November <?php echo $ucpt_start_date + 1; ?></th>
+									<th>December <?php echo $ucpt_start_date + 1; ?></th>
+									<th>January <?php echo $ucpt_start_date + 2; ?></th>
+									<th>February <?php echo $ucpt_start_date + 2; ?></th>
+									<th>March <?php echo $ucpt_start_date + 2; ?></th>
+									<th>April <?php echo $ucpt_start_date + 2; ?></th>
+									<th>May <?php echo $ucpt_start_date + 2; ?></th>
+									<th>June <?php echo $ucpt_start_date + 2; ?></th>
+									<th>July <?php echo $ucpt_start_date + 2; ?></th>
+									<th>August <?php echo $ucpt_start_date + 2; ?></th>
+									<th>September <?php echo $ucpt_start_date + 2; ?></th>
+									<th>October <?php echo $ucpt_start_date + 2; ?></th>
+									<th>November <?php echo $ucpt_start_date + 2; ?></th>
+									<th>December <?php echo $ucpt_start_date + 2; ?></th>
+									<th>January <?php echo $ucpt_start_date + 3; ?></th>
+									<th>February <?php echo $ucpt_start_date + 3; ?></th>
+									<th>March <?php echo $ucpt_start_date + 3; ?></th>
+									<th>April <?php echo $ucpt_start_date + 3; ?></th>
+									<th>May <?php echo $ucpt_start_date + 3; ?></th>
+									<th>June <?php echo $ucpt_start_date + 3; ?></th>
+									<th>July <?php echo $ucpt_start_date + 3; ?></th>
+									<th>August <?php echo $ucpt_start_date + 3; ?></th>
+									<th>September <?php echo $ucpt_start_date + 3; ?></th>
+									<th>October <?php echo $ucpt_start_date + 3; ?></th>
+									<th>November <?php echo $ucpt_start_date + 3; ?></th>
+									<th>December <?php echo $ucpt_start_date + 3; ?></th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+						$ucpt_measures_options = get_option( 'ucpt_manage_settings' );
+						$max_measures = $ucpt_measures_options['ucpt_manage_measure_number'];
+						$measure_count = 1;
+						while ($measure_count <= $max_measures) {
+							if (custom_field_data('ucpt_measure_' . $measure_count . '') != "") {
+						?>
+						<tr>
+							<td>
+								<?php echo custom_field_data('ucpt_measure_' . $measure_count . ''); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>
+							</td>
+							<td>
+								<?php if (custom_field_data('ucpt_measure_' . $measure_count . '_status') == "Archived") { ?>
+								<span style="background-color: #d71616; color: #fff; padding: 3px; ">Archived</span>
+								<?php } else { ?>
+								<span style="background-color: #129f49; color: #fff; padding: 3px; ">Active</span>
+								<?php } ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_trend'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_contributor'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m1'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m2'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m3'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m4'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m5'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m6'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m7'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m8'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m9'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m10'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m11'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m12'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m1'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m2'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m3'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m4'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m5'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m6'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m7'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m8'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m9'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m10'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m11'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m12'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m1'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m2'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m3'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m4'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m5'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m6'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m7'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m8'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m9'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m10'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m11'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m12'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m1'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m2'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m3'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m4'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m5'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m6'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m7'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m8'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m9'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m10'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m11'); ?>
+							</td>
+							<td>
+								<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m12'); ?>
+							</td>
+						</tr>
+						<?php 
+							}
+							$measure_count++;
+						}
+						?>
+						</tbody>
+					</table>
+				</div>
+				</div>
+				<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>
+				<p>
+				<h3>Data Narrative</h3>
+				</p>
+				<p>
+					<?php echo custom_field_data('ucpt_data_narrative'); ?>
+				</p>
+				</div>
+				<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>
+				<p>
+				<h3>Data Visualization</h3>
+				</p>
+				<?php
+				$chart_id = substr(md5(rand()), 0, 6);
+				?>
+				<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+				<canvas id="<?php echo $chart_id; ?>"></canvas>
+				<script>
+				 var ctx = document.getElementById('<?php echo $chart_id; ?>').getContext('2d');
+					var data = {
+				  "labels": [
+					"1/<?php echo $ucpt_start_date; ?>",
+					"2/<?php echo $ucpt_start_date; ?>",
+					"3/<?php echo $ucpt_start_date; ?>",
+					"4/<?php echo $ucpt_start_date; ?>",
+					"5/<?php echo $ucpt_start_date; ?>",
+					"6/<?php echo $ucpt_start_date; ?>",
+					"7/<?php echo $ucpt_start_date; ?>",
+					"8/<?php echo $ucpt_start_date; ?>",
+					"9/<?php echo $ucpt_start_date; ?>",
+					"10/<?php echo $ucpt_start_date; ?>",
+					"11/<?php echo $ucpt_start_date; ?>",
+					"12/<?php echo $ucpt_start_date; ?>",
+					"1/<?php echo $ucpt_start_date + 1; ?>",
+					"2/<?php echo $ucpt_start_date + 1; ?>",
+					"3/<?php echo $ucpt_start_date + 1; ?>",
+					"4/<?php echo $ucpt_start_date + 1; ?>",
+					"5/<?php echo $ucpt_start_date + 1; ?>",
+					"6/<?php echo $ucpt_start_date + 1; ?>",
+					"7/<?php echo $ucpt_start_date + 1; ?>",
+					"8/<?php echo $ucpt_start_date + 1; ?>",
+					"9/<?php echo $ucpt_start_date + 1; ?>",
+					"10/<?php echo $ucpt_start_date + 1; ?>",
+					"11/<?php echo $ucpt_start_date + 1; ?>",
+					"12/<?php echo $ucpt_start_date + 1; ?>",
+					"1/<?php echo $ucpt_start_date + 2; ?>",
+					"2/<?php echo $ucpt_start_date + 2; ?>",
+					"3/<?php echo $ucpt_start_date + 2; ?>",
+					"4/<?php echo $ucpt_start_date + 2; ?>",
+					"5/<?php echo $ucpt_start_date + 2; ?>",
+					"6/<?php echo $ucpt_start_date + 2; ?>",
+					"7/<?php echo $ucpt_start_date + 2; ?>",
+					"8/<?php echo $ucpt_start_date + 2; ?>",
+					"9/<?php echo $ucpt_start_date + 2; ?>",
+					"10/<?php echo $ucpt_start_date + 2; ?>",
+					"11/<?php echo $ucpt_start_date + 2; ?>",
+					"12/<?php echo $ucpt_start_date + 2; ?>",
+					"1/<?php echo $ucpt_start_date + 3; ?>",
+					"2/<?php echo $ucpt_start_date + 3; ?>",
+					"3/<?php echo $ucpt_start_date + 3; ?>",
+					"4/<?php echo $ucpt_start_date + 3; ?>",
+					"5/<?php echo $ucpt_start_date + 3; ?>",
+					"6/<?php echo $ucpt_start_date + 3; ?>",
+					"7/<?php echo $ucpt_start_date + 3; ?>",
+					"8/<?php echo $ucpt_start_date + 3; ?>",
+					"9/<?php echo $ucpt_start_date + 3; ?>",
+					"10/<?php echo $ucpt_start_date + 3; ?>",
+					"11/<?php echo $ucpt_start_date + 3; ?>",
+					"12/<?php echo $ucpt_start_date + 3; ?>"
+				  ],
+				  "datasets": [
 					<?php
-					echo "</div>";
-			} 
+						$ucpt_measures_options = get_option( 'ucpt_manage_settings' );
+						$max_measures = $ucpt_measures_options['ucpt_manage_measure_number'];
+						$measure_count = 1;
+						while ($measure_count <= $max_measures) {
+						if (custom_field_data('ucpt_measure_' . $measure_count . '') != "") {
+					?>
+					{
+					  "label": "<?php echo custom_field_data('ucpt_measure_' . $measure_count ); ?>",
+					  "backgroundColor": "<?php $chart_color = substr(md5(rand()), 0, 6); echo "#" . $chart_color; ?>",
+					  "fill": false,
+					  "data": [
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m1'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m2'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m3'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m4'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m5'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m6'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m7'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m8'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m9'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m10'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m11'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y1_m12'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m1'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m2'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m3'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m4'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m5'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m6'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m7'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m8'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m9'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m10'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m11'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y2_m12'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m1'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m2'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m3'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m4'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m5'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m6'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m7'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m8'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m9'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m10'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m11'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y3_m12'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m1'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m2'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m3'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m4'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m5'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m6'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m7'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m8'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m9'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m10'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m11'); ?>",
+						"<?php echo custom_field_data('ucpt_m_' . $measure_count . '_y4_m12'); ?>"
+					  ],
+					  "borderColor": "<?php echo "#" . $chart_color; ?>"
+					},
+					{
+					  "label": "<?php echo custom_field_data('ucpt_measure_' . $measure_count ); ?> Target Goal",
+					  "backgroundColor": "<?php echo "#" . $chart_color; ?>",
+					  "hidden": true,
+					  "fill": false,
+					  "data": [
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>",
+						"<?php echo custom_field_data('ucpt_measure_' . $measure_count . '_goal'); ?>"
+					  ],
+					  "borderColor": "<?php echo "#" . $chart_color; ?>"
+					},
+					<?php
+						}
+					$measure_count++;
+					}
+					?>
+				  ]
+				};
+					var options = {
+				  "title": {
+					"display": true,
+					"text": "Group Measures",
+					"position": "bottom",
+					"fontStyle": "bold",
+					"fullWidth": true
+				  },
+				  "legend": {
+					"display": true,
+					"position": "bottom",
+					"fullWidth": true
+				  },
+				  "scales": {
+					"yAxes": [
+					  {
+						"ticks": {
+						  "beginAtZero": true
+						},
+						"gridLines": {
+						  "display": true,
+						  "lineWidth": 1,
+						  "drawOnChartArea": true,
+						  "color": "#000000",
+						  "zeroLineColor": "#000000",
+						  "zeroLineWidth": 1,
+						  "drawTicks": true
+						}
+					  }
+					],
+					"xAxes": {
+					  "0": {
+						"gridLines": {
+						  "drawOnChartArea": false,
+						  "offsetGridLines": false,
+						  "zeroLineColor": "#000000",
+						  "display": true,
+						  "lineWidth": 2,
+						  "drawTicks": true,
+						  "zeroLineWidth": 2,
+						  "color": "#000000"
+						},
+						"ticks": {
+						  "display": true,
+						  "beginAtZero": true
+						}
+					  }
+					}
+				  },
+				  "elements": {
+					"line": {
+					  "borderColor": "#000000",
+					  "lineTension": 0
+					}
+				  }
+				};
+
+					var myChart = new Chart(ctx, {
+						type: 'line',
+						data: data,
+						options: options
+					});
+					
+
+				</script>
+				</div>
+				<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>
+				<p>
+				<h3>Last Modification</h3>
+				</p>
+				<p>
+					<?php echo custom_field_data('ucpt_data_edit_log'); ?>
+				</p>
+				</div>
+				<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>
+				<p>
+				<h3>Planning Tool Info</h3>
+				</p>
+				<p>
+					<a href="https://equityengage.com">Open source health equity platform</a> powered by the <a href="https://equityengage.com/universal-community-planning-tool/">Universal Community Planning Tool</a> (UCPT), <a href="https://buddypress.org/">BuddyPress</a>, and <a href="https://wordpress.org/">WordPress</a>. 
+					<br />
+					Built with ❤️ in <a href="https://garretthealth.org">Garrett County, Maryland</a>. 
+					<br />
+					Expanded development and open source release of this plug-in was sponsored by the <a href="https://phnci.org">Public Health National Center for Innovations</a> (PHNCI), a division of the <a href="http://www.phaboard.org/">Public Health Accreditation Board (PHAB)</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation (RWJF)</a>.
+					<br />
+					Related: assessments, informatics, population health, hyper local data, measurement, open data, open source, community engagement, health equity, community solutions, data dashboard
+				</p>
+				</div>
+				<?php
+				}
+			}
+			
 		} // end of class
-		bp_register_group_extension( 'UCPT_Pages' );
+		bp_register_group_extension( 'UCPT_Data_Pages' );
 		 
 		endif;
 	}
 			
-add_action( 'bp_include', 'ucpt_strategy_page' );
+add_action( 'bp_include', 'ucpt_data_page' );
+
+// End Front-End Display
 
 ?>
