@@ -3,7 +3,7 @@
 Plugin Name: UCPT Strategy Card
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
-Version: 9.01b
+Version: 10.1
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
