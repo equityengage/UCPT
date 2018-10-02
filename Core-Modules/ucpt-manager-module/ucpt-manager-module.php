@@ -3,7 +3,7 @@
 Plugin Name: UCPT Manager Module
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting UCPT driver plug-ins with additional variables.
-Version: 8.13
+Version: 10.1
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
@@ -83,6 +83,46 @@ function ucpt_manage_settings_init(  ) {
 		'ucpt_manage_priority_5', 
 		__( 'Priority Focus Area #5', 'ucpt_manage' ), 
 		'ucpt_manage_priority_5_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+	
+	add_settings_field( 
+		'ucpt_manage_priority_6', 
+		__( 'Priority Focus Area #6', 'ucpt_manage' ), 
+		'ucpt_manage_priority_6_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+
+	add_settings_field( 
+		'ucpt_manage_priority_7', 
+		__( 'Priority Focus Area #7', 'ucpt_manage' ), 
+		'ucpt_manage_priority_7_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+
+	add_settings_field( 
+		'ucpt_manage_priority_8', 
+		__( 'Priority Focus Area #8', 'ucpt_manage' ), 
+		'ucpt_manage_priority_8_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+
+	add_settings_field( 
+		'ucpt_manage_priority_9', 
+		__( 'Priority Focus Area #9', 'ucpt_manage' ), 
+		'ucpt_manage_priority_9_render', 
+		'pluginPage', 
+		'ucpt_manage_pluginPage_section' 
+	);
+
+	add_settings_field( 
+		'ucpt_manage_priority_10', 
+		__( 'Priority Focus Area #10', 'ucpt_manage' ), 
+		'ucpt_manage_priority_10_render', 
 		'pluginPage', 
 		'ucpt_manage_pluginPage_section' 
 	);
@@ -351,6 +391,55 @@ function ucpt_manage_priority_5_render(  ) {
 	$options = get_option( 'ucpt_manage_settings' );
 	?>
 	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_5]' value='<?php echo $options['ucpt_manage_priority_5']; ?>'>
+	<?php
+
+}
+
+function ucpt_manage_priority_6_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_6]' value='<?php echo $options['ucpt_manage_priority_6']; ?>'>
+	<?php
+
+}
+
+
+function ucpt_manage_priority_7_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_7]' value='<?php echo $options['ucpt_manage_priority_7']; ?>'>
+	<?php
+
+}
+
+
+function ucpt_manage_priority_8_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_8]' value='<?php echo $options['ucpt_manage_priority_8']; ?>'>
+	<?php
+
+}
+
+
+function ucpt_manage_priority_9_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_9]' value='<?php echo $options['ucpt_manage_priority_9']; ?>'>
+	<?php
+
+}
+
+
+function ucpt_manage_priority_10_render(  ) { 
+
+	$options = get_option( 'ucpt_manage_settings' );
+	?>
+	<input type='text' name='ucpt_manage_settings[ucpt_manage_priority_10]' value='<?php echo $options['ucpt_manage_priority_10']; ?>'>
 	<?php
 
 }
