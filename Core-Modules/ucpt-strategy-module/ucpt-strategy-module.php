@@ -3,7 +3,7 @@
 Plugin Name: UCPT Strategy Card
 Plugin URI: https://equityengage.com
 Description: This plug-in is a UCPT module supporting the addition of strategy cards to BuddyPress groups.
-Version: 9.01b
+Version: 10.1
 Requires at least: 4.9
 Tested up to: 4.9.6
 License: GPL v3
@@ -48,10 +48,15 @@ function ucpt_strategy_page() {
 				);
 				parent::init( $args );
 			}
+			function admin_screen( $group_id = null ) {
+            //Helper Text
+			echo "<p>These settings are configured via the front-end of your planning tool.</p>";
+			}
+			function admin_screen_save( $group_id = null ) {
+			}			
 			function settings_screen( $group_id = null ) {
 			$editor_settings = array( 'media_buttons' => false );
 			?>
-
 			<div style="background-color:#0c71c3; color: #fff; padding: 20px; margin-top: 10px; margin-bottom: 20px;">
 				<b style="font-size: 150%;">Strategy Planning Worksheet</b>
 				<p>An innovative feature, unique to the planning tool, is the ability to dynamically track strategy progress over time. This workspace is designed for multiple stakeholders to collaborate on one specific strategy.  Please explain the specific strategy you will be measuring in the space below. <b>Expert Tip:</b> If the strategy can not be measured please consider alternative actions that can be assessed.</p>
@@ -243,6 +248,20 @@ function ucpt_strategy_page() {
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
 					echo "<p><b>Research:</b> " . custom_field_strategy_card('ucpt_research') . "</p>";
+					echo "</div>";
+					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
+					echo "<p><b>Planning Tool Info:</b></p>";
+					?>
+					<p>
+						<a href="https://equityengage.com">Open source health equity platform</a> powered by the <a href="https://equityengage.com/universal-community-planning-tool/">Universal Community Planning Tool</a> (UCPT), <a href="https://buddypress.org/">BuddyPress</a>, and <a href="https://wordpress.org/">WordPress</a>. 
+						<br />
+						Built with ❤️ in <a href="https://garretthealth.org">Garrett County, Maryland</a>. 
+						<br />
+						Expanded development and open source release of this plug-in was sponsored by the <a href="https://phnci.org">Public Health National Center for Innovations</a> (PHNCI), a division of the <a href="http://www.phaboard.org/">Public Health Accreditation Board (PHAB)</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation (RWJF)</a>.
+						<br />
+						Related: assessments, informatics, population health, hyper local data, measurement, open data, open source, community engagement, health equity, community solutions, data dashboard
+					</p>
+					<?php
 					echo "</div>";
 			} 
 		} // end of class
