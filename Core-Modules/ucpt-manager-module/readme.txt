@@ -26,6 +26,7 @@ This project is currently maintained by the Garrett County Health Department, an
 This plug-in is provided as sample code to accompany the Universal Community Planning Tool (UCPT) Framework, and carries no warranty. Our hope is that this functional sample code will inspire your community to empower stakeholders and expand equity.
 
 Charts powered by https://www.chartjs.org/
+Data tables powered by https://datatables.net/
 
 Thanks to the following sources for inspiration and assistance in developing this project:
 http://wpsettingsapi.jeroensormani.com/
@@ -39,6 +40,3 @@ https://codex.buddypress.org/plugindev/how-to-edit-group-meta-tutorial/
 4. Install and Activate Optional UCPT Driver Modules, such as the UCPT Strategy Card Module or UCPT Raw Data + Module
 
 All settings are managed through the UCPT Manager Module plug-in.
-
-== Changelog ==
-v8.13 Initial release to WordPress repository.
