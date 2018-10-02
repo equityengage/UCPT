@@ -250,9 +250,8 @@ function ucpt_strategy_page() {
 					echo "<p><b>Research:</b> " . custom_field_strategy_card('ucpt_research') . "</p>";
 					echo "</div>";
 					echo "<div style='background-color: #f1f1f1; margin: 15px 30px 15px 30px; padding: 5px 20px 5px 20px;'>";
-					echo "<p><b>Planning Tool Info:</b></p>";
+					echo "<p><b>Planning Tool Info:</b><br />";
 					?>
-					<p>
 						<a href="https://equityengage.com">Open source health equity platform</a> powered by the <a href="https://equityengage.com/universal-community-planning-tool/">Universal Community Planning Tool</a> (UCPT), <a href="https://buddypress.org/">BuddyPress</a>, and <a href="https://wordpress.org/">WordPress</a>. 
 						<br />
 						Built with ❤️ in <a href="https://garretthealth.org">Garrett County, Maryland</a>. 
@@ -260,9 +259,8 @@ function ucpt_strategy_page() {
 						Expanded development and open source release of this plug-in was sponsored by the <a href="https://phnci.org">Public Health National Center for Innovations</a> (PHNCI), a division of the <a href="http://www.phaboard.org/">Public Health Accreditation Board (PHAB)</a>, and the <a href="https://www.rwjf.org/">Robert Wood Johnson Foundation (RWJF)</a>.
 						<br />
 						Related: assessments, informatics, population health, hyper local data, measurement, open data, open source, community engagement, health equity, community solutions, data dashboard
-					</p>
 					<?php
-					echo "</div>";
+					echo "</p></div>";
 			} 
 		} // end of class
 		bp_register_group_extension( 'UCPT_Pages' );
